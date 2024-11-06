@@ -1,0 +1,29 @@
+@import '../../styles/variables';
+.card {
+    box-sizing: border-box;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: all 0.5s;
+    user-select: none;
+    margin: 1%;
+    border-radius: 1rem;
+    border: $bordeClaro;
+    overflow: hidden;
+  
+    &:hover {
+      border: $bordeOscuro;
+      transform: scale(1.05);
+    }
+  
+    &:active {
+      transform: scale(0.95) rotateZ(1.7deg);
+    }
+  
+    img {
+      object-fit: cover;
+      width: 100%;
+    }
+    .texto {
+      padding: 2.5%;
+    }
+  }
