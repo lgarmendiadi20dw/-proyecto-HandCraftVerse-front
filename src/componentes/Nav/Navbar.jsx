@@ -12,12 +12,7 @@ const Navbar = () => {
             <h1 className="navbar-brand">
                 <Link to="/crear-producto">Producto</Link>
             </h1>
-            {/* <h1 className="navbar-brand">
-                <Link to="/categorias">Categoría</Link>
-            </h1>
-            <h1 className="navbar-brand">
-                <Link to="/colores">Color</Link>
-            </h1> */}
+         
 
             <div className="search-container">
                 <input type="text" placeholder="Buscar..." className="search-input" />
