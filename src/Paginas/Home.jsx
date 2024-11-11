@@ -1,26 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Categoria from "../componentes/Home/Categoria";
 
-const Home = () => {
+const Home = ({ apiIp }) => {
   const [categorias, setCategorias] = useState([]);
-
-  const cargarCategorias = () => {
-    fetch('https://localhost:8443/categorias/all')
-      .then(response => response.json())
+  const cargarCategorias = useCallback(() => {
+    fetch(`${apiIp}categorias/all`)
+      .then(response => {
+        if (!response.ok) {
+          return response.text().then(text => {
+            throw new Error(`Network response was not ok: ${response.status} - ${text}`);
+          });
+        }
+        return response.json();
+      })
       .then(data => {
         setCategorias(data);
       })
       .catch(error => console.error("Error al cargar las categorías:", error));
-  };
+  }, [apiIp]);
 
   useEffect(() => {
     cargarCategorias();
-  }, []);
+  }, [cargarCategorias]);
 
   return (
     <div className="container">
       {categorias.map(categoria => (
-        <Categoria key={categoria.id} {...categoria} />
+        <Categoria key={categoria.id} {...categoria} apiIp={apiIp} />
       ))}
     </div>
   );

@@ -1,26 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 // import Navbar from '../Nav/Navbar';
 import './FormulariosProductos.scss';
 
-const CrearProducto = () => {
+const CrearProducto = ({ apiIp }) => {
     const [categorias, setCategorias] = useState([]);
     const [colores, setColores] = useState([]);
     const [selectedCategorias, setSelectedCategorias] = useState([]);
     const [selectedColores, setSelectedColores] = useState([]);
 
-    useEffect(() => {
-        fetch('https://localhost:8443/categorias/all')
+    const fetchCategorias = useCallback(() => {
+        fetch(`${apiIp}categorias/all`)
             .then(response => response.json())
             .then(data => {
                 setCategorias(data);
             });
+    }, [apiIp]);
 
-        fetch('https://localhost:8443/colores/all')
+    const fetchColores = useCallback(() => {
+        fetch(`${apiIp}colores/all`)
             .then(response => response.json())
             .then(data => {
                 setColores(data);
             });
-    }, []);
+    }, [apiIp]);
+
+    useEffect(() => {
+        fetchCategorias();
+        fetchColores();
+    }, [fetchCategorias, fetchColores]);
 
     const updateButtonText = (type, value) => {
         if (type === 'categorias') {
@@ -49,7 +56,7 @@ const CrearProducto = () => {
 
         console.log(producto);
        
-        fetch('https://localhost:8443/productos/create', {
+        fetch(`${apiIp}productos/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

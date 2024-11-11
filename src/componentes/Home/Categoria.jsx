@@ -1,23 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Carrusel from "./Carrusel/Carrusel";
+import { Link } from "react-router-dom";
 
-const Categoria = ({ id, nombre }) => {
+const Categoria = ({ id, nombre, apiIp }) => {
   const [productos, setProductos] = useState([]);
 
-  const cargarProductos = () => {
-    fetch(`https://localhost:8443/productos/categoria/${id}`)
-      .then(response => response.json())
-      .then(data => {
+  const cargarProductos = useCallback(() => {
+    fetch(`${apiIp}productos/categoria/${nombre}`)
+      .then((response) => {
+        console.log("Raw response:", response);
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Parsed JSON:", data);
         if (data.length > 0) {
           setProductos(data);
         }
       })
-      .catch(error => console.error("Error al cargar los productos:", error));
-  };
+      .catch((error) => console.error("Error al cargar los productos:", error));
+  }, [apiIp, nombre]);
 
   useEffect(() => {
     cargarProductos();
-  }, [id]);
+  }, [id, cargarProductos]); // Asegúrate de incluir cargarProductos en la lista de dependencias
 
   if (productos.length === 0) return null;
 
@@ -25,7 +30,7 @@ const Categoria = ({ id, nombre }) => {
     <div className="previewCategoria">
       <h2 className="tituloEnPag">
         <span>
-          <a href="verCategoria.html" className="textoTitulo">{nombre}</a>
+        <Link to={`/categoria/${nombre}`} className="textoTitulo">{nombre}</Link>
           <svg
             id="arrow-horizontal"
             xmlns="http://www.w3.org/2000/svg"
@@ -35,9 +40,9 @@ const Categoria = ({ id, nombre }) => {
           ></svg>
         </span>
       </h2>
-      <Carrusel productos={productos} />
+      <Carrusel productos={productos.map(producto => ({ ...producto, key: producto.id }))} />
     </div>
   );
-}
+};
 
 export default Categoria;

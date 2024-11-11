@@ -1,19 +1,35 @@
 //colores
-$fondoClaro: #fef8f2;
-$fondoOscuro: #efe9dc;
-$letraFondoClaro: #9d9183;
-$letraFondoOscuro: #9B8170;
 
-$colorTitulos: #764b36;
-$colorTexto: #252525;
+// Paleta modo claro
+
+    $fondoClaro: #fef8f2;
+    $fondoOscuro: #efe9dc;
+    $letraFondoClaro: #9d9183;
+    $letraFondoOscuro: #9B8170;
+    
+    $colorTitulos: #764b36;
+    $colorTexto: #252525;
+
+
+// Paleta modo oscuro
+
+$fondoClaroDark: #1c1a19;
+$fondoOscuroDark: #2b2a29;
+$letraFondoClaroDark: #c4b7a6;
+$letraFondoOscuroDark: #d8cbbb;
+
+$colorTitulosOscuroDark: #ad7d5b;
+$colorTextoOscuroDark: #e2e2e2;
 
 //letra
 $titulos: "Times New Roman", Times, serif;
 $sidebarFontSize: 18px;
 
 //bordes
-
 $bordeClaro: $letraFondoClaro 1.8px solid;
 $bordeOscuro: $letraFondoOscuro 1.8px solid;
 
 //////
+
+
+
