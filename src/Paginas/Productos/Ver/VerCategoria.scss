@@ -1,0 +1,48 @@
+@import "../../../styles/variables";
+.gridProductos {
+  display: grid;
+
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: min-content;
+  gap: 2.15em;
+}
+
+
+h1{
+  color: $colorTitulos;
+}
+
+.cta {
+  border: none;
+  background: none;
+  cursor: pointer;
+  
+  
+  svg {
+    stroke:$colorTitulos;
+    stroke-width:2; 
+    stroke-linecap:round;
+    width: 2em;
+
+    &:hover {
+      transform: scale(1.1);
+      stroke:$letraFondoOscuro;
+    }
+  }
+
+}
+
+
+
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.pagina-actual {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: $colorTitulos;
+}

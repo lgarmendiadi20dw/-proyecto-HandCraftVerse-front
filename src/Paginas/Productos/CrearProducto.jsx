@@ -50,11 +50,11 @@ const CrearProducto = ({ apiIp }) => {
             precio: parseFloat(event.target.precio.value),
             stock: parseInt(event.target.stock.value),
             descripcion: event.target.descripcion.value,
-            categorias: selectedCategorias,
-            colores: selectedColores
+            categorias: selectedCategorias.map(categoria => categorias.find(cat => cat.nombre === categoria).nombre),
+            colores: selectedColores.map(color => colores.find(col => col.nombre === color).hex)
         };
 
-        console.log(producto);
+        console.log(selectedColores.map(color => colores.find(col => col.nombre === color).hex));
        
         fetch(`${apiIp}productos/create`, {
             method: 'POST',
@@ -74,70 +74,70 @@ const CrearProducto = ({ apiIp }) => {
     };
 
     return (
-            <div className="container">
-                <h2>Crear Producto</h2>
-                <form onSubmit={enviarFormulario} name="nuevo">
-                    <div className="form-group">
-                        <label htmlFor="vendedorId">ID del Vendedor:</label>
-                        <input type="number" className="form-control" name="vendedorId" id="vendedorId" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="nombre">Nombre del Producto:</label>
-                        <input type="text" className="form-control" name="nombre" id="nombre" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="precio">Precio:</label>
-                        <input type="number" className="form-control" name="precio" id="precio" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="stock">Stock:</label>
-                        <input type="number" className="form-control" name="stock" id="stock" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="descripcion">Descripción:</label>
-                        <textarea className="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
-                    </div>
-                    <div className="dropdown">
-                <label htmlFor="categorias">Categorías:</label>
-                <div id="selectionButtonCategorias">
-                    {selectedCategorias.length > 0 ? selectedCategorias.join(', ') : 'Seleccionar opciones'}
+        <div className="container">
+            <h2>Crear Producto</h2>
+            <form onSubmit={enviarFormulario} name="nuevo">
+                <div className="form-group">
+                    <label htmlFor="vendedorId">ID del Vendedor:</label>
+                    <input type="number" className="form-control" name="vendedorId" id="vendedorId" />
                 </div>
-                <div className="dropdown-content" id="categorias">
-                    {categorias && Array.isArray(categorias) && categorias.map(categoria => (
-                        <label key={categoria.nombre}>
-                            <input 
-                                type="checkbox" 
-                                value={categoria.nombre} 
-                                onChange={() => updateButtonText('categorias', categoria.nombre)} 
-                            />
-                            {categoria.nombre}
-                        </label>
-                    ))}
+                <div className="form-group">
+                    <label htmlFor="nombre">Nombre del Producto:</label>
+                    <input type="text" className="form-control" name="nombre" id="nombre" />
                 </div>
-            </div>
-            <div className="dropdown">
-                <label htmlFor="colores">Colores:</label>
-                <div id="selectionButtonColores">
-                    {selectedColores.length > 0 ? selectedColores.join(', ') : 'Seleccionar opciones'}
+                <div className="form-group">
+                    <label htmlFor="precio">Precio:</label>
+                    <input type="number" className="form-control" name="precio" id="precio" />
                 </div>
-                <div className="dropdown-content" id="colores">
-                    {colores && Array.isArray(colores) && colores.map(color => (
-                        <label key={color.nombre}>
-                            <input 
-                                type="checkbox" 
-                                value={color.hex} 
-                                onChange={() => updateButtonText('colores', color.nombre)} 
-                            />
-                            <span style={{ display: 'inline-block', width: '12px', height: '12px', backgroundColor: color.hex, marginRight: '5px' }}></span>
-                            {color.nombre}
-                        </label>
-                    ))}
+                <div className="form-group">
+                    <label htmlFor="stock">Stock:</label>
+                    <input type="number" className="form-control" name="stock" id="stock" />
                 </div>
-            </div>
-                    <input type="submit" value="Crear" />
-                </form>
-                <div id="mensaje" className="mt-3"></div>
-            </div>
+                <div className="form-group">
+                    <label htmlFor="descripcion">Descripción:</label>
+                    <textarea className="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+                </div>
+                <div className="dropdown">
+                    <label htmlFor="categorias">Categorías:</label>
+                    <div id="selectionButtonCategorias">
+                        {selectedCategorias.length > 0 ? selectedCategorias.join(', ') : 'Seleccionar opciones'}
+                    </div>
+                    <div className="dropdown-content" id="categorias">
+                        {categorias && Array.isArray(categorias) && categorias.map(categoria => (
+                            <label key={categoria.nombre}>
+                                <input 
+                                    type="checkbox" 
+                                    value={categoria.nombre} 
+                                    onChange={() => updateButtonText('categorias', categoria.nombre)} 
+                                />
+                                {categoria.nombre}
+                            </label>
+                        ))}
+                    </div>
+                </div>
+                <div className="dropdown">
+                    <label htmlFor="colores">Colores:</label>
+                    <div id="selectionButtonColores">
+                        {selectedColores.length > 0 ? selectedColores.join(', ') : 'Seleccionar opciones'}
+                    </div>
+                    <div className="dropdown-content" id="colores">
+                        {colores && Array.isArray(colores) && colores.map(color => (
+                            <label key={color.nombre}>
+                                <input 
+                                    type="checkbox" 
+                                    value={color.hex} 
+                                    onChange={() => updateButtonText('colores', color.nombre)} 
+                                />
+                                <span style={{ display: 'inline-block', width: '12px', height: '12px', backgroundColor: color.hex, marginRight: '5px' }}></span>
+                                {color.nombre}
+                            </label>
+                        ))}
+                    </div>
+                </div>
+                <input type="submit" value="Crear" />
+            </form>
+            <div id="mensaje" className="mt-3"></div>
+        </div>
     );
 };
 

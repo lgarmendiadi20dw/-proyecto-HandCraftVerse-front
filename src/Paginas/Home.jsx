@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import Categoria from "../componentes/Home/Categoria";
+import Categoria from "../components/Home/Categoria";
 
 const Home = ({ apiIp }) => {
   const [categorias, setCategorias] = useState([]);

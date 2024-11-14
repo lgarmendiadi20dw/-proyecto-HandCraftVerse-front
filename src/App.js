@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./componentes/Nav/Navbar";
+import Navbar from "./components/Nav/Navbar";
 import CrearProducto from "./Paginas/Productos/CrearProducto";
 import Login from "./Paginas/Login";
 import Home from "./Paginas/Home";
