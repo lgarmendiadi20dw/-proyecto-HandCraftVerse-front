@@ -1,11 +1,10 @@
 import React from "react";
-import "./Inputs.css";
+import "./Input.scss";
 
-const Button = ({ text, id }) => {
+const Button = ({ type, text, id }) => {
   return (
-    <button class="full-rounded" id={id}>
+    <button id={id} typt={type}>
       <span>{text}</span>
-      <div class="border full-rounded"></div>
     </button>
   );
 };

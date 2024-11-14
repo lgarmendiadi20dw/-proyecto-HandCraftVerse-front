@@ -1,39 +1,34 @@
+@import '../../styles/variables.scss';
+
 button {
-    font-size: 16px;
-    position: relative;
-    margin: auto;
-    padding: 1em 2.5em 1em 2.5em;
+    display: flex;
+    height: 3em;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee4b;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.2s linear;
+    cursor: pointer;
     border: none;
     background: #fff;
-    transition: all 0.1s linear;
-    box-shadow: 0 0.4em 1em rgba(0, 0, 0, 0.1);
+   
+   
+   & > svg {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
    }
    
-   button:active {
-    transform: scale(0.95);
+   &:hover > svg {
+    font-size: 1.2em;
+    transform: translateX(-5px);
    }
    
-   button span {
-    color: #464646;
+   &:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
    }
-   
-   button .border {
-    position: absolute;
-    border: 0.15em solid #fff;
-    transition: all 0.3s 0.08s linear;
-    top: 50%;
-    left: 50%;
-    width: 9em;
-    height: 3em;
-    transform: translate(-50%, -50%);
-   }
-   
-   button:hover .border {
-    display: block;
-    width: 9.9em;
-    height: 3.7em;
-   }
-   
-   .full-rounded {
-    border-radius: 2em;
-   }
+}

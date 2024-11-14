@@ -1,5 +1,6 @@
-import "./App.css";
+import "./App.scss";
 import React from "react";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Nav/Navbar";
 import CrearProducto from "./Paginas/Productos/CrearProducto";

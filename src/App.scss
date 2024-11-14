@@ -2,7 +2,6 @@
 
 body {
   margin: 0;
-  background-color: $fondo;
   color: $colorTexto;
   a {
     color: inherit;
@@ -11,7 +10,7 @@ body {
 }
 
 .conNavLateral {
-  margin-left: 220px;
+  margin-left: 210px;
 }
 .container {
   margin-top: 1.5rem;
@@ -27,21 +26,7 @@ body {
   padding-left: 20px; 
 }
 
-.container {
-  display: flex;
-  margin-top: 1.5rem;
-  padding-left: 5%;
-  margin-right: 5%;
-  justify-content: center;
-  align-items: center;
-}
 
-.conNavLateral {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding-left: 20px; 
-}
 
 .tituloEnPag {
   cursor: pointer;
