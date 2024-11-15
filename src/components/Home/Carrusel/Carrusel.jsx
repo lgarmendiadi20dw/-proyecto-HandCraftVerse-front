@@ -4,11 +4,11 @@ import Card from "../../Card/Card";
 
 const Carrusel = ({ productos }) => {
   useEffect(() => {
-    const carousels = document.querySelectorAll(".carousel-container");
+    const carousels = document.querySelectorAll(".carousel-contenedor");
 
     carousels.forEach((carousel) => {
-      const leftButton = carousel.querySelector(".carousel-button.left");
-      const rightButton = carousel.querySelector(".carousel-button.right");
+      const leftButton = carousel.querySelector(".boton-carrusel.left");
+      const rightButton = carousel.querySelector(".boton-carrusel.right");
       const imgFlex = carousel.querySelector(".imgFlex");
 
       leftButton.addEventListener("click", () => {
@@ -28,8 +28,8 @@ const Carrusel = ({ productos }) => {
 
     return () => {
       carousels.forEach((carousel) => {
-        const leftButton = carousel.querySelector(".carousel-button.left");
-        const rightButton = carousel.querySelector(".carousel-button.right");
+        const leftButton = carousel.querySelector(".boton-carrusel.left");
+        const rightButton = carousel.querySelector(".boton-carrusel.right");
         leftButton.removeEventListener("click", null);
         rightButton.removeEventListener("click", null);
       });
@@ -37,9 +37,9 @@ const Carrusel = ({ productos }) => {
   }, []);
 
   return (
-    <div className="carousel-container">
+    <div className="carousel-contenedor">
       <button
-        className="carousel-button left"
+        className="boton-carrusel left"
         aria-label="Desplazar a la izquierda"
       >
         &#10094;
@@ -50,7 +50,7 @@ const Carrusel = ({ productos }) => {
         ))}
       </div>
       <button
-        className="carousel-button right"
+        className="boton-carrusel right"
         aria-label="Desplazar a la derecha"
       >
         &#10095;

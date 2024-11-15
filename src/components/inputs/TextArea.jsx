@@ -1,10 +1,10 @@
 import React from "react";
 import "./Input.scss";
 
-const Text = ({ type, text, name }) => {
+const TextArea = ({ text, name }) => {
   return (
     <div className="group">
-      <input required type={type} name={name} id={name} className="input" />
+      <textarea required name={name} id={name} className="input" />
       <span className="highlight" />
       <span className="bar" />
       <label htmlFor={name}>{text}</label>
@@ -12,4 +12,4 @@ const Text = ({ type, text, name }) => {
   );
 };
 
-export default Text;
+export default TextArea;

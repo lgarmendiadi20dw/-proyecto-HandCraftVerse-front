@@ -33,7 +33,7 @@ const Navbar = () => {
                 <Link to="/crear-producto">Producto</Link>
             </h1>
          
-            <div className="search-container">
+            <div className="search-contenedor">
                 <input type="text" placeholder="Buscar..." className="search-input" />
                 <button className="search-button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

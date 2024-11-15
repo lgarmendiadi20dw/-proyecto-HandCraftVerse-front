@@ -2,6 +2,8 @@ import React, { useEffect, useState, useCallback } from "react";
 // import Navbar from '../Nav/Navbar';
 import "./FormulariosProductos.scss";
 import Button from "../../components/inputs/Button";
+import Text from "../../components/inputs/Text";
+import TextArea from "../../components/inputs/TextArea";
 
 const CrearProducto = ({ apiIp }) => {
   const [categorias, setCategorias] = useState([]);
@@ -89,66 +91,26 @@ const CrearProducto = ({ apiIp }) => {
   };
 
   return (
-    <div className="container">
-      <a
-        href="#"
-        class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+    <div className="contenedor">
+      <div
+        className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
       >
         <h2>Crear Producto</h2>
         <form onSubmit={enviarFormulario} name="nuevo">
-          <div className="form-group">
-            <label htmlFor="vendedorId">ID del Vendedor:</label>
-            <input
-              type="number"
-              className="form-control"
-              name="vendedorId"
-              id="vendedorId"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="nombre">Nombre del Producto:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="nombre"
-              id="nombre"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="precio">Precio:</label>
-            <input
-              type="number"
-              className="form-control"
-              name="precio"
-              id="precio"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="stock">Stock:</label>
-            <input
-              type="number"
-              className="form-control"
-              name="stock"
-              id="stock"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="descripcion">Descripción:</label>
-            <textarea
-              className="form-control"
-              id="descripcion"
-              name="descripcion"
-              rows="3"
-            ></textarea>
-          </div>
-          <div className="dropdown">
+          <Text type="text" text="Vendedor ID" name="vendedorId" />
+          <Text type="text" text="Nombre del producto" name="nombre" />
+          <Text type="number" text="Precio" name="precio" />
+          <Text type="number" text="Stock" name="stock" />
+          <TextArea text="Descripción" name="descripcion" />
+          
+          <div className="custom-dropdown">
             <label htmlFor="categorias">Categorías:</label>
             <div id="selectionButtonCategorias">
               {selectedCategorias.length > 0
                 ? selectedCategorias.join(", ")
                 : "Seleccionar opciones"}
             </div>
-            <div className="dropdown-content" id="categorias">
+            <div className="custom-dropdown-content" id="categorias">
               {categorias &&
                 Array.isArray(categorias) &&
                 categorias.map((categoria) => (
@@ -165,14 +127,14 @@ const CrearProducto = ({ apiIp }) => {
                 ))}
             </div>
           </div>
-          <div className="dropdown">
+          <div className="custom-dropdown">
             <label htmlFor="colores">Colores:</label>
             <div id="selectionButtonColores">
               {selectedColores.length > 0
                 ? selectedColores.join(", ")
                 : "Seleccionar opciones"}
             </div>
-            <div className="dropdown-content" id="colores">
+            <div className="custom-dropdown-content" id="colores">
               {colores &&
                 Array.isArray(colores) &&
                 colores.map((color) => (
@@ -199,7 +161,7 @@ const CrearProducto = ({ apiIp }) => {
           <Button text="Crear" type="submit" />
         </form>
         <div id="mensaje" className="mt-3"></div>
-      </a>
+      </div>
     </div>
   );
 };

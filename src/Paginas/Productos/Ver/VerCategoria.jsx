@@ -33,7 +33,7 @@ const VerCategoria = ({ apiIp }) => {
   return (
     <div className="containerSidebar">
       <Sidebar apiIp={apiIp} />
-      <div className="container conNavLateral">
+      <div className="contenedor conNavLateral">
         <h1>{nombre}</h1>
         <div className="gridProductos">
           {productosPaginados.map((producto) => (

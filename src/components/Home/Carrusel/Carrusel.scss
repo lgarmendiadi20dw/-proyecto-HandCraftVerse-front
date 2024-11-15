@@ -1,6 +1,6 @@
 @import '../../../styles/variables.scss';
 
-  .carousel-container {
+  .carousel-contenedor {
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -18,9 +18,8 @@
       }
     }
   
-    .carousel-button {
+    .boton-carrusel {
       position: absolute;
-  
       top: 50%;
       transform: translateY(-50%);
       background-color: $fondoClaro;
@@ -48,7 +47,7 @@
     }
   }
 
-.carousel-container {
+.carousel-contenedor {
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -66,7 +65,7 @@
       }
     }
   
-    .carousel-button {
+    .boton-carrusel {
       position: absolute;
   
       top: 50%;
