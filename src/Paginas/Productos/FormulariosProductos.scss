@@ -1,12 +1,25 @@
 @import "../../styles/variables.scss";
 
+.formNewProduct {
+  & > * {
+    margin: 15px;
+  }
+}
+
 .custom-dropdown {
   position: relative;
   display: inline-block;
 
+  label {
+    font-size: 16px;
+    color: $letraFondoOscuro;
+    padding: 10px 10px 10px 5px;
+  }
+
   &:hover .custom-dropdown-content {
     display: block;
   }
+
   .custom-dropdown-content {
     display: none;
     position: absolute;
@@ -15,14 +28,31 @@
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
+
     label {
-     display: block;
+      display: block;
       margin: 5px 0;
     }
-  } 
+  }
+
+  // Asegurarse de usar la clase activa para determinar el estilo de los botones
+  &.active {
+    #selectionButtonColores,
+    #selectionButtonCategorias {
+      border-bottom: 1px solid $letraFondoOscuro;
+    }
+  }
+
+  &.inactive {
+    #selectionButtonColores,
+    #selectionButtonCategorias {
+      border-bottom: 1px solid $fondoOscuro;
+    }
+  }
 }
 
-#selectionButtonColores ,#selectionButtonCategorias {
+#selectionButtonColores,
+#selectionButtonCategorias {
   font-size: 16px;
   padding: 10px 10px 10px 5px;
   display: block;
@@ -31,8 +61,8 @@
   border-bottom: 1px solid $fondoOscuro;
   background: transparent;
   cursor: pointer;
+  color: #999;
 
-    color: #999;
   &.has-selection {
     color: $colorTexto;
   }
@@ -57,5 +87,3 @@
     animation: inputHighlighter 0.3s ease;
   }
 }
-
-

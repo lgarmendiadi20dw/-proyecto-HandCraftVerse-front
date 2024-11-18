@@ -107,19 +107,21 @@ const CrearProducto = ({ apiIp }) => {
         className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
       >
         <h2>Crear Producto</h2>
-        <form onSubmit={enviarFormulario} name="nuevo">
+        <form onSubmit={enviarFormulario} name="nuevo" className="formNewProduct">
           <Text type="text" text="Vendedor ID" name="vendedorId" />
           <Text type="text" text="Nombre del producto" name="nombre" />
           <Text type="number" text="Precio" name="precio" />
           <Text type="number" text="Stock" name="stock" />
           <TextArea text="Descripción" name="descripcion" />
           
-          <div className="custom-dropdown">
+          <div className="custom-dropdown ">
             <label htmlFor="categorias">Categorías:</label>
             <div id="selectionButtonCategorias">
               {selectedCategorias.length > 0
                 ? selectedCategorias.join(", ")
                 : "Seleccionar opciones"}
+                <span className="highlight" />
+                <span className="bar" />
             </div>
             <div className="custom-dropdown-content" id="categorias">
               {categorias &&
@@ -156,16 +158,13 @@ const CrearProducto = ({ apiIp }) => {
                       value={color.hex}
                       onChange={() => updateButtonText("colores", color.nombre)}
                     />
-                    <span
+                    
+                    {color.nombre}<span
                       style={{
-                        display: "inline-block",
-                        width: "12px",
-                        height: "12px",
                         backgroundColor: color.hex,
-                        marginRight: "5px",
                       }}
+                      className="colorView "
                     ></span>
-                    {color.nombre}
                   </label>
                 ))}
             </div>

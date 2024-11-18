@@ -1,24 +1,42 @@
-@import './styles/variables';
+@import "./styles/variables";
 
+body[data-theme='light'] {
+  @if $theme == 'light' {
+    background-color: $fondo;
+    color: $colorTexto;
+  }
+}
+body[data-theme='dark'] {
+  @if $theme == 'dark' {
+    background-color: $fondoDarkMode;
+    color: $colorTextoDarkMode;
+  }
+}
 body {
+
   margin: 0;
-  color: $colorTexto;
+  
   font-family: $fuenteLetra;
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0.5px;
-  background-color: $fondo;  
   a {
     color: inherit;
     text-decoration: none;
   }
+  
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: bold;
   margin-bottom: 0.3em;
 }
-.containerSidebar{
+.containerSidebar {
   margin: 0;
 }
 
@@ -36,7 +54,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .tituloEnPag {
   cursor: pointer;
-  
+
   svg {
     transform: translateX(-9px);
     transition: all 0.3s ease;
@@ -67,4 +85,13 @@ h1, h2, h3, h4, h5, h6 {
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+}
+
+.colorView {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 5px;
+  border-radius: 50%;
+  border: 1px solid #858585;
 }

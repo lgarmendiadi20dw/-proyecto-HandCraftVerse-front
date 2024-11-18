@@ -11,11 +11,22 @@ import VerCategoria from "./Paginas/Productos/Ver/VerCategoria";
 
 const App = () => {
   const apiIp = process.env.IP || 'https://localhost:8443/';
+  const [darkMode, setDarkMode] = useState(false);
 
+  // Cambiar tema basado en el estado
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark-mode");
+      document.body.classList.remove("light-mode");
+    } else {
+      document.body.classList.add("light-mode");
+      document.body.classList.remove("dark-mode");
+    }
+  }, [darkMode]);
   return (
     <BrowserRouter>
       <div>
-        <Navbar />
+        <Navbar setDarkMode={setDarkMode} darkMode={darkMode}/>
         <Routes>
           <Route path="/" element={<Home apiIp={apiIp} />} />
           <Route path="/crear-producto" element={<CrearProducto apiIp={apiIp} />} />

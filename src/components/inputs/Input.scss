@@ -28,15 +28,14 @@
 
   &:hover {
     box-shadow: 9px 9px 33px $fondoOscuro, -9px -9px 33px $fondoClaro;
+    background-color: $fondoOscuro;
     transform: translateY(-2px);
   }
 }
 
 .group {
     position: relative;
-    margin:15px;
-  
-  
+    
   .input {
 
     font-size: 16px;
@@ -54,7 +53,7 @@
     &:focus ~ label,
     &:valid ~ label {
       top: -10px;
-      font-size: 14px;
+      font-size: 16px;
       color: $letraFondoOscuro;
     }
   
