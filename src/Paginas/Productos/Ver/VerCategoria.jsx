@@ -33,8 +33,8 @@ const VerCategoria = ({ apiIp }) => {
   return (
     <div className="containerSidebar">
       <Sidebar apiIp={apiIp} />
-      <div className="contenedor conNavLateral">
-        <h1>{nombre}</h1>
+      <div className="container pt-6  conNavLateral p-10">
+        <h1 className="textoTitulo">{nombre}</h1>
         <div className="gridProductos">
           {productosPaginados.map((producto) => (
             <Card key={producto.id} {...producto} />

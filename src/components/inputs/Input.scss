@@ -12,7 +12,7 @@
   transition: all 0.2s linear;
   cursor: pointer;
   border: none;
-  background: #fff;
+  background: $fondoClaro;
 
   & > svg {
     margin-right: 5px;
@@ -27,7 +27,7 @@
   }
 
   &:hover {
-    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    box-shadow: 9px 9px 33px $fondoOscuro, -9px -9px 33px $fondoClaro;
     transform: translateY(-2px);
   }
 }
@@ -53,7 +53,7 @@
   
     &:focus ~ label,
     &:valid ~ label {
-      top: -px;
+      top: -10px;
       font-size: 14px;
       color: $letraFondoOscuro;
     }
@@ -68,8 +68,9 @@
     }
 
     &.textarea {
-      resize: vertical;
-      min-height: 100px;
+      resize: none;
+      min-height: 45px;
+      overflow: hidden;
     }
   }
   

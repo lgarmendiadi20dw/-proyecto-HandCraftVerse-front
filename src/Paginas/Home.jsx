@@ -24,7 +24,7 @@ const Home = ({ apiIp }) => {
   }, [cargarCategorias]);
 
   return (
-    <div className="contenedor">
+    <div className="container mt-6 ">
       {categorias.map(categoria => (
         <Categoria key={categoria.id} {...categoria} apiIp={apiIp} />
       ))}

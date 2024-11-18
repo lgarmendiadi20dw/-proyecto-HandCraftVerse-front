@@ -3,44 +3,40 @@
 body {
   margin: 0;
   color: $colorTexto;
+  font-family: $fuenteLetra;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  background-color: $fondo;  
   a {
     color: inherit;
     text-decoration: none;
   }
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  margin-bottom: 0.3em;
+}
+.containerSidebar{
+  margin: 0;
+}
+
 .conNavLateral {
-  margin-left: 210px;
-}
-.contenedor {
-  margin-top: 1.5rem;
-  padding-left: 5%;
-  margin-right: 5%;
-  justify-content: center;
-  align-items: center;
-  
+  margin-left: 225px;
 }
 
-.containerSidebar {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding-left: 20px; 
+.textoTitulo {
+  position: relative;
+  color: $colorTitulos;
+  font-family: $titulos;
+  letter-spacing: 1px;
+  font-size: 25px;
 }
-
-
 
 .tituloEnPag {
   cursor: pointer;
-  width: fit-content;
-
-  .textoTitulo {
-    position: relative;
-    color: $colorTitulos;
-    font-family: $titulos;
-    letter-spacing: 1px;
-  }
-
+  
   svg {
     transform: translateX(-9px);
     transition: all 0.3s ease;

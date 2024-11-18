@@ -32,6 +32,22 @@ const CrearProducto = ({ apiIp }) => {
     fetchColores();
   }, [fetchCategorias, fetchColores]);
 
+  useEffect(() => {
+    const selectionButtonCategorias = document.getElementById("selectionButtonCategorias");
+    if (selectedCategorias.length > 0) {
+      selectionButtonCategorias.classList.add("has-selection");
+    } else {
+      selectionButtonCategorias.classList.remove("has-selection");
+    }
+
+    const selectionButtonColores = document.getElementById("selectionButtonColores");
+    if (selectedColores.length > 0) {
+      selectionButtonColores.classList.add("has-selection");
+    } else {
+      selectionButtonColores.classList.remove("has-selection");
+    }
+  }, [selectedCategorias, selectedColores]);
+
   const updateButtonText = (type, value) => {
     if (type === "categorias") {
       setSelectedCategorias((prev) =>
@@ -65,11 +81,6 @@ const CrearProducto = ({ apiIp }) => {
       ),
     };
 
-    console.log(
-      selectedColores.map(
-        (color) => colores.find((col) => col.nombre === color).hex
-      )
-    );
 
     fetch(`${apiIp}productos/create`, {
       method: "POST",
@@ -91,7 +102,7 @@ const CrearProducto = ({ apiIp }) => {
   };
 
   return (
-    <div className="contenedor">
+    <div className="container mt-6">
       <div
         className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
       >
@@ -127,6 +138,7 @@ const CrearProducto = ({ apiIp }) => {
                 ))}
             </div>
           </div>
+          <br/>
           <div className="custom-dropdown">
             <label htmlFor="colores">Colores:</label>
             <div id="selectionButtonColores">

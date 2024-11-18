@@ -1,35 +1,38 @@
+// Importa fuentes externas
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/fonts.css");
+
 //colores
 
 // Paleta modo claro
+$fondo: #ffffff;
+$fondoClaro: #f6f0e1;
+$fondoOscuro: #d1c4b3;
+$letraFondoClaro: #5a4f3c;
+$letraFondoOscuro: #4a3a2b;
 
-    $fondoClaro: #fef8f2;
-    $fondoOscuro: #efe9dc;
-    $letraFondoClaro: #9d9183;
-    $letraFondoOscuro: #9B8170;
-    
-    $colorTitulos: #764b36;
-    $colorTexto: #252525;
-
+$colorTitulos: #6d4c41;
+$colorTexto: #252525;
 
 // Paleta modo oscuro
 
-$fondoClaroDark: #1c1a19;
-$fondoOscuroDark: #2b2a29;
-$letraFondoClaroDark: #c4b7a6;
-$letraFondoOscuroDark: #d8cbbb;
+$fondoDarckMode: #121212;
+$fondoClaroDarckMode: #2a2a2a;
+$fondoOscuroDarckMode: #1e1e1e;
+$letraFondoClaroDarckMode: #e0c9a6;
+$letraFondoOscuroDarckMode: #d8c0a3;
 
-$colorTitulosOscuroDark: #ad7d5b;
-$colorTextoOscuroDark: #e2e2e2;
+$colorTitulosDarckMode: #f4e1c1;
+$colorTextoDarckMode: #e5e5e5;
+
 
 //letra
-$titulos: "Times New Roman", Times, serif;
+$titulos: "Lexend", sans-serif;
 $sidebarFontSize: 18px;
+$fuenteLetra: "OpenDyslexic", sans-serif;
 
 //bordes
 $bordeClaro: $letraFondoClaro 1.8px solid;
 $bordeOscuro: $letraFondoOscuro 1.8px solid;
 
 //////
-
-
-

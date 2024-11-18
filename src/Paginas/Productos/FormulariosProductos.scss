@@ -1,4 +1,4 @@
- @import "../../styles/variables.scss";
+@import "../../styles/variables.scss";
 
 .custom-dropdown {
   position: relative;
@@ -22,7 +22,7 @@
   } 
 }
 
-#selectionButtonColores {
+#selectionButtonColores ,#selectionButtonCategorias {
   font-size: 16px;
   padding: 10px 10px 10px 5px;
   display: block;
@@ -31,6 +31,11 @@
   border-bottom: 1px solid $fondoOscuro;
   background: transparent;
   cursor: pointer;
+
+    color: #999;
+  &.has-selection {
+    color: $colorTexto;
+  }
 
   &:focus {
     outline: none;
@@ -52,3 +57,5 @@
     animation: inputHighlighter 0.3s ease;
   }
 }
+
+
