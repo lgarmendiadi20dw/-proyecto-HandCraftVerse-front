@@ -8,11 +8,9 @@ const Categoria = ({ id, nombre, apiIp }) => {
   const cargarProductos = useCallback(() => {
     fetch(`${apiIp}productos/categoria/${nombre}`)
       .then((response) => {
-        console.log("Raw response:", response);
         return response.json();
       })
       .then((data) => {
-        console.log("Parsed JSON:", data);
         if (data.length > 0) {
           setProductos(data);
         }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from "react";
-// import Navbar from '../Nav/Navbar';
 import "./FormulariosProductos.scss";
 import Button from "../../components/inputs/Button";
 import Text from "../../components/inputs/Text";
@@ -10,165 +9,161 @@ const CrearProducto = ({ apiIp }) => {
   const [colores, setColores] = useState([]);
   const [selectedCategorias, setSelectedCategorias] = useState([]);
   const [selectedColores, setSelectedColores] = useState([]);
+  const [openDropdown, setOpenDropdown] = useState(null); // Control de dropdown abierto
 
-  const fetchCategorias = useCallback(() => {
-    fetch(`${apiIp}categorias/all`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCategorias(data);
-      });
-  }, [apiIp]);
-
-  const fetchColores = useCallback(() => {
-    fetch(`${apiIp}colores/all`)
-      .then((response) => response.json())
-      .then((data) => {
-        setColores(data);
-      });
-  }, [apiIp]);
-
-  useEffect(() => {
-    fetchCategorias();
-    fetchColores();
-  }, [fetchCategorias, fetchColores]);
+  const fetchData = useCallback(
+    async (endpoint, setter) => {
+      try {
+        const response = await fetch(`${apiIp}${endpoint}`);
+        if (!response.ok) throw new Error("Error al obtener datos");
+        const data = await response.json();
+        setter(data);
+      } catch (error) {
+        console.error(`Error al obtener ${endpoint}:`, error);
+      }
+    },
+    [apiIp]
+  );
 
   useEffect(() => {
-    const selectionButtonCategorias = document.getElementById("selectionButtonCategorias");
-    if (selectedCategorias.length > 0) {
-      selectionButtonCategorias.classList.add("has-selection");
-    } else {
-      selectionButtonCategorias.classList.remove("has-selection");
-    }
+    fetchData("categorias/all", setCategorias);
+    fetchData("colores/all", setColores);
+  }, [fetchData]);
 
-    const selectionButtonColores = document.getElementById("selectionButtonColores");
-    if (selectedColores.length > 0) {
-      selectionButtonColores.classList.add("has-selection");
-    } else {
-      selectionButtonColores.classList.remove("has-selection");
-    }
-  }, [selectedCategorias, selectedColores]);
-
-  const updateButtonText = (type, value) => {
-    if (type === "categorias") {
-      setSelectedCategorias((prev) =>
-        prev.includes(value)
-          ? prev.filter((item) => item !== value)
-          : [...prev, value]
-      );
-    } else {
-      setSelectedColores((prev) =>
-        prev.includes(value)
-          ? prev.filter((item) => item !== value)
-          : [...prev, value]
-      );
-    }
+  const toggleSelection = (type, value) => {
+    const setter = type === "categorias" ? setSelectedCategorias : setSelectedColores;
+    setter((prev) =>
+      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
+    );
   };
 
-  const enviarFormulario = (event) => {
+  const toggleDropdown = (type) => {
+    setOpenDropdown((prev) => (prev === type ? null : type));
+  };
+
+  const enviarFormulario = async (event) => {
     event.preventDefault();
 
+    const { vendedorId, nombre, precio, stock, descripcion } = event.target;
+
+    if (!vendedorId.value || !nombre.value || !precio.value || !stock.value || !descripcion.value) {
+      alert("Por favor, complete todos los campos.");
+      return;
+    }
+
     const producto = {
-      vendedorId: event.target.vendedorId.value,
-      nombre: event.target.nombre.value,
-      precio: parseFloat(event.target.precio.value),
-      stock: parseInt(event.target.stock.value),
-      descripcion: event.target.descripcion.value,
-      categorias: selectedCategorias.map(
-        (categoria) => categorias.find((cat) => cat.nombre === categoria).nombre
-      ),
+      vendedorId: vendedorId.value,
+      nombre: nombre.value,
+      precio: parseFloat(precio.value),
+      stock: parseInt(stock.value, 10),
+      descripcion: descripcion.value,
+      categorias: selectedCategorias,
       colores: selectedColores.map(
-        (color) => colores.find((col) => col.nombre === color).hex
+        (color) => colores.find((col) => col.nombre === color)?.hex
       ),
     };
-
-
-    fetch(`${apiIp}productos/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(producto),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        document.getElementById("mensaje").innerText =
-          "Producto creado exitosamente";
-      })
-      .catch((error) => {
-        document.getElementById("mensaje").innerText =
-          "Error al crear el producto";
-        console.error("Error:", error);
+    try {
+      const response = await fetch(`${apiIp}productos/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(producto),
       });
+
+      if (!response.ok) throw new Error("Error al crear el producto");
+
+      const result = await response.json();
+      document.getElementById("mensaje").innerText = "Producto creado exitosamente";
+    } catch (error) {
+      document.getElementById("mensaje").innerText = "Error al crear el producto";
+      console.error("Error:", error);
+    }
   };
 
   return (
-    <div className="container mt-6">
-      <div
-        className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-      >
+    <div className="container mt-6 flex justify-center items-center min-h-screen">
+      <div className="formularioProducto">
         <h2>Crear Producto</h2>
-        <form onSubmit={enviarFormulario} name="nuevo" className="formNewProduct">
+        <form onSubmit={enviarFormulario} className="formNewProduct">
           <Text type="text" text="Vendedor ID" name="vendedorId" />
           <Text type="text" text="Nombre del producto" name="nombre" />
           <Text type="number" text="Precio" name="precio" />
           <Text type="number" text="Stock" name="stock" />
           <TextArea text="Descripción" name="descripcion" />
-          
-          <div className="custom-dropdown ">
+
+          {/* Dropdown de categorías */}
+          <div
+            className={`custom-dropdown ${
+              openDropdown === "categorias" ? "active" : "inactive"
+            }`}
+          >
             <label htmlFor="categorias">Categorías:</label>
-            <div id="selectionButtonCategorias">
+            <div
+              id="selectionButtonCategorias"
+              className={`selection-button ${
+                selectedCategorias.length > 0 ? "has-selection" : ""
+              }`}
+              onClick={() => toggleDropdown("categorias")}
+            >
               {selectedCategorias.length > 0
                 ? selectedCategorias.join(", ")
                 : "Seleccionar opciones"}
-                <span className="highlight" />
-                <span className="bar" />
             </div>
-            <div className="custom-dropdown-content" id="categorias">
-              {categorias &&
-                Array.isArray(categorias) &&
-                categorias.map((categoria) => (
+            {openDropdown === "categorias" && (
+              <div className="custom-dropdown-content">
+                {categorias.map((categoria) => (
                   <label key={categoria.nombre}>
                     <input
                       type="checkbox"
                       value={categoria.nombre}
-                      onChange={() =>
-                        updateButtonText("categorias", categoria.nombre)
-                      }
+                      onChange={() => toggleSelection("categorias", categoria.nombre)}
                     />
                     {categoria.nombre}
                   </label>
                 ))}
-            </div>
+              </div>
+            )}
           </div>
-          <br/>
-          <div className="custom-dropdown">
+
+          {/* Dropdown de colores */}
+          <div
+            className={`custom-dropdown ${
+              openDropdown === "colores" ? "active" : "inactive"
+            }`}
+          >
             <label htmlFor="colores">Colores:</label>
-            <div id="selectionButtonColores">
+            <div
+              id="selectionButtonColores"
+              className={`selection-button ${
+                selectedColores.length > 0 ? "has-selection" : ""
+              }`}
+              onClick={() => toggleDropdown("colores")}
+            >
               {selectedColores.length > 0
                 ? selectedColores.join(", ")
                 : "Seleccionar opciones"}
             </div>
-            <div className="custom-dropdown-content" id="colores">
-              {colores &&
-                Array.isArray(colores) &&
-                colores.map((color) => (
+            {openDropdown === "colores" && (
+              <div className="custom-dropdown-content">
+                {colores.map((color) => (
                   <label key={color.nombre}>
                     <input
                       type="checkbox"
-                      value={color.hex}
-                      onChange={() => updateButtonText("colores", color.nombre)}
+                      value={color.nombre}
+                      onChange={() => toggleSelection("colores", color.nombre)}
                     />
-                    
-                    {color.nombre}<span
-                      style={{
-                        backgroundColor: color.hex,
-                      }}
-                      className="colorView "
+                    {color.nombre}
+                    <span
+                      style={{ backgroundColor: color.hex }}
+                      className="colorView"
                     ></span>
                   </label>
                 ))}
-            </div>
+              </div>
+            )}
           </div>
+
           <Button text="Crear" type="submit" />
         </form>
         <div id="mensaje" className="mt-3"></div>

@@ -1,17 +1,6 @@
 @import "./styles/variables";
 
-body[data-theme='light'] {
-  @if $theme == 'light' {
-    background-color: $fondo;
-    color: $colorTexto;
-  }
-}
-body[data-theme='dark'] {
-  @if $theme == 'dark' {
-    background-color: $fondoDarkMode;
-    color: $colorTextoDarkMode;
-  }
-}
+
 body {
 
   margin: 0;
@@ -85,13 +74,4 @@ h6 {
     transform: scaleX(1);
     transform-origin: bottom left;
   }
-}
-
-.colorView {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-left: 5px;
-  border-radius: 50%;
-  border: 1px solid #858585;
 }

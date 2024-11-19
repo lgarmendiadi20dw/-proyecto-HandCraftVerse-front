@@ -25,7 +25,6 @@ const TextArea = ({ text, name }) => {
         style={{ height }}
         onInput={handleInput}
       />
-      <span className="highlight" />
       <span className="bar" />
       <label htmlFor={name}>{text}</label>
     </div>
