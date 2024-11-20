@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./Carrusel.scss";
 import Card from "../../Card/Card";
 
-const Carrusel = ({ productos }) => {
+const Carrusel = ({ apiIp, productos }) => {
   useEffect(() => {
     const carousels = document.querySelectorAll(".carousel-contenedor");
 
@@ -45,8 +45,8 @@ const Carrusel = ({ productos }) => {
         &#10094;
       </button>
       <div className="imgFlex">
-        {productos.map(producto => (
-          <Card key={producto.id} {...producto} />
+        {productos.map((producto) => (
+          <Card key={producto.id} producto={producto} apiIp={apiIp} />
         ))}
       </div>
       <button
@@ -57,6 +57,6 @@ const Carrusel = ({ productos }) => {
       </button>
     </div>
   );
-}
+};
 
 export default Carrusel;

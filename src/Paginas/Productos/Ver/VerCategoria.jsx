@@ -37,7 +37,7 @@ const VerCategoria = ({ apiIp }) => {
         <h1 className="textoTitulo">{nombre}</h1>
         <div className="gridProductos">
           {productosPaginados.map((producto) => (
-            <Card key={producto.id} {...producto} />
+            <Card key={producto.id} producto={producto} apiIp={apiIp} />
           ))}
         </div>
         <div className="paginacion">

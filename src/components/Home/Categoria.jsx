@@ -38,7 +38,7 @@ const Categoria = ({ id, nombre, apiIp }) => {
           ></svg>
         </span>
       </h2>
-      <Carrusel productos={productos.map(producto => ({ ...producto, key: producto.id }))} />
+      <Carrusel productos={productos.map(producto => ({ ...producto, key: producto.id }))} apiIp={apiIp} />
     </div>
   );
 };
