@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Sidebar.scss";
 import { Link } from "react-router-dom";
-const Sidebar = () => {
+
+const Sidebar = ({ apiIp }) => {
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    fetch(`${apiIp}categorias/all`)
+      .then(response => response.json())
+      .then(data => setCategorias(data))
+      .catch(error => console.error('Error fetching categories:', error));
+  }, [apiIp]);
+
   return (
     <aside className="sidebar">
       <ul>
-        <li><Link>Categoría 1</Link></li>
-        <li><Link>Categoría 2</Link></li>
-        <li><Link>Categoría 3</Link></li>
-        <li><Link>Categoría 4</Link></li>
+        {categorias.map((categoria, index) => (
+          <li key={index}><Link to={`/categoria/${categoria.nombre}`}>{categoria.nombre}</Link></li>
+        ))}
       </ul>
       <div className="filtroPrecio">
         <div className="field">
@@ -23,4 +32,5 @@ const Sidebar = () => {
     </aside>
   );
 }
+
 export default Sidebar;

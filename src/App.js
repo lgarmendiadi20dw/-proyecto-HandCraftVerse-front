@@ -8,6 +8,7 @@ import Login from "./Paginas/Login";
 import Registrar from "./Paginas/Registrar";
 import Home from "./Paginas/Home";
 import VerCategoria from "./Paginas/Productos/Ver/VerCategoria";
+import Sidebar from "./components/sidebar/Sidebar";
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/iniciarSesion" element={<Login apiIp={apiIp} />} />
           <Route path="/registrarse" element={<Registrar apiIp={apiIp} />} />
           <Route path="/categoria/:nombre" element={<VerCategoria apiIp={apiIp} />} />
+          <Route  element={<Sidebar apiIp={apiIp} />} />
           
         </Routes>
       </div>

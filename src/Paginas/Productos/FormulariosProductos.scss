@@ -1,29 +1,5 @@
 @import "../../styles/variables.scss";
 
-.formularioProducto {
-  display: block;
-  width: 75rem;
-  padding: 1.5rem; /* 6 * 0.25rem */
-  background-color: #ffffff; /* white */
-  border: 1px solid #e5e7eb; /* gray-200 */
-  border-radius: 0.5rem; /* rounded-lg */
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); /* shadow */
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: #f3f4f6; /* gray-100 */
-  }
-
-  /* Dark mode styles */
-  .dark & {
-    background-color: #1f2937; /* gray-800 */
-    border-color: #374151; /* gray-700 */
-
-    &:hover {
-      background-color: #374151; /* gray-700 */
-    }
-  }
-}
-
 .formNewProduct {
   & > * {
     margin: 15px;
@@ -44,98 +20,102 @@
       width: 100%;
     }
   }
-}
 
-.custom-dropdown {
-  position: relative;
-  display: inline-block;
-
-  label {
-    font-size: 16px;
-    color: $letraFondoOscuro;
-    padding: 10px 10px 10px 5px;
-  }
-
-  &:hover .custom-dropdown-content {
-    display: block;
-  }
-
-  .custom-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 12px 16px;
-    z-index: 1;
+  .custom-dropdown {
+    position: relative;
+    display: inline-block;
 
     label {
-      display: block;
-      margin: 5px 0;
-    }
-    input {
-      font-size: 18px;
-    }
-  }
-
-  // Asegurarse de usar la clase activa para determinar el estilo de los botones
-  &.active {
-    #selectionButtonColores,
-    #selectionButtonCategorias {
-      border-bottom: 1px solid $letraFondoOscuro;
-    }
-  }
-
-  &.inactive {
-    #selectionButtonColores,
-    #selectionButtonCategorias {
-      border-bottom: 1px solid $fondoOscuro;
-    }
-  }
-
-  #selectionButtonColores,
-  #selectionButtonCategorias {
-    font-size: 16px;
-    padding: 10px 10px 10px 5px;
-    display: block;
-    width: 200px;
-    border: none;
-    border-bottom: 1px solid $fondoOscuro;
-    background: transparent;
-    cursor: pointer;
-    color: #999;
-
-    &.has-selection {
-      color: $colorTexto;
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-    &:focus ~ label,
-    &:valid ~ label {
-      top: -20px;
-      font-size: 14px;
+      font-size: 16px;
       color: $letraFondoOscuro;
+      padding: 10px 10px 10px 5px;
     }
 
-    &:focus ~ .bar:before,
-    &:focus ~ .bar:after {
-      width: 50%;
+    &:hover .custom-dropdown-content {
+      display: block;
     }
 
-    &:focus ~ .highlight {
-      animation: inputHighlighter 0.3s ease;
+    .custom-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      padding: 12px 16px;
+      z-index: 1;
+
+      label {
+        display: block;
+        margin: 5px 0;
+      }
+      input {
+        font-size: 18px;
+      }
     }
+
+    // Asegurarse de usar la clase activa para determinar el estilo de los botones
+    &.active {
+      #selectionButtonColores,
+      #selectionButtonCategorias {
+        border-bottom: 1px solid $letraFondoOscuro;
+      }
+    }
+
+    &.inactive {
+      #selectionButtonColores,
+      #selectionButtonCategorias {
+        border-bottom: 1px solid $fondoOscuro;
+      }
+    }
+
+    #selectionButtonColores,
+    #selectionButtonCategorias {
+      font-size: 16px;
+      padding: 10px 10px 10px 5px;
+      display: block;
+      border: none;
+      border-bottom: 1px solid $fondoOscuro;
+      background: transparent;
+      cursor: pointer;
+      color: #999;
+
+      &.has-selection {
+        color: $colorTexto;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus ~ label,
+      &:valid ~ label {
+        top: -20px;
+        font-size: 14px;
+        color: $letraFondoOscuro;
+      }
+
+      &:focus ~ .bar:before,
+      &:focus ~ .bar:after {
+        width: 50%;
+      }
+
+      &:focus ~ .highlight {
+        animation: inputHighlighter 0.3s ease;
+      }
+    }
+  }
+
+  .colorView {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-left: 5px;
+    border-radius: 50%;
+    border: 1px solid #858585;
   }
 }
-
-.colorView {
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  margin-left: 5px;
-  border-radius: 50%;
-  border: 1px solid #858585;
+.newProduct {
+  .formulario {
+    width: 75rem;
+  }
 }

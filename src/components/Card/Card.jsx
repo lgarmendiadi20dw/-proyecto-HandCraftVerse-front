@@ -7,7 +7,6 @@ const Card = ({ apiIp, producto }) => {
     const { id, nombre, precio } = producto;
     const [imagen, setImagen] = useState(unnamedImage);
 
-    console.log(imagen);
     useEffect(() => {
         const fetchImagen = async () => {
             try {

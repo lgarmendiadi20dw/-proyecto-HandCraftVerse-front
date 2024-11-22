@@ -5,54 +5,56 @@ import Sidebar from "../../../components/sidebar/Sidebar";
 import "./VerCategoria.scss";
 
 const VerCategoria = ({ apiIp }) => {
-  const { nombre } = useParams();
-  const [productos, setProductos] = useState([]);
-  const [pagina, setPagina] = useState(0);
-  const productosPorPagina = 18;
+  const { nombre } = useParams(); // Obtener el nombre de la categoría desde la URL.
+  const [productos, setProductos] = useState([]); // Lista de productos.
+  const [pagina, setPagina] = useState(0); // Página actual.
+  const [hayMasProductos, setHayMasProductos] = useState(true); // Controla si quedan más productos por cargar.
+  const productosPorPagina = 18; // Número de productos por página.
 
+  // Función para cargar productos desde el API.
   const cargarProductos = useCallback(() => {
-    fetch(`${apiIp}productos/categoria/${nombre}`)
+    fetch(`${apiIp}productos/categoria/${nombre}?pagina=${pagina}&limite=${productosPorPagina}`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.length > 0) {
-          setProductos(data);
-        }
+        setProductos((prevProductos) => [...prevProductos, ...data]); // Agregar los nuevos productos al estado.
+        setHayMasProductos(data.length === productosPorPagina); // Si la cantidad recibida es menor al límite, no hay más productos.
       })
       .catch((error) => console.error("Error al cargar los productos:", error));
-  }, [apiIp, nombre]);
+  }, [apiIp, nombre, pagina]);
 
+  // Efecto para cargar productos al cambiar de página o de categoría.
   useEffect(() => {
     cargarProductos();
   }, [cargarProductos]);
 
-  const productosPaginados = productos.slice(
-    pagina * productosPorPagina,
-    (pagina + 1) * productosPorPagina
-  );
+  // Efecto para reiniciar los estados al cambiar de categoría.
+  useEffect(() => {
+    setProductos([]);
+    setPagina(0);
+    setHayMasProductos(true);
+  }, [nombre]);
 
   return (
     <div className="containerSidebar">
       <Sidebar apiIp={apiIp} />
-      <div className="container pt-6  conNavLateral p-10">
+      <div className="container pt-6 conNavLateral p-10">
         <h1 className="textoTitulo">{nombre}</h1>
         <div className="gridProductos">
-          {productosPaginados.map((producto) => (
-            <Card key={producto.id} producto={producto} apiIp={apiIp} />
-          ))}
-        </div>
-        <div className="paginacion">
-          {pagina > 0 && (
-            <button className="cta" onClick={() => setPagina(pagina - 1)}>
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M6 12L11 7M6 12L11 17"   stroke-linejoin="round"></path> </g></svg>
-            </button>
-          )}
-          <span className="pagina-actual">{pagina + 1}</span>
-          {productos.length > (pagina + 1) * productosPorPagina && (
-            <button className="cta" onClick={() => setPagina(pagina + 1)}>
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M18 12L13 7M18 12L13 17"   stroke-linejoin="round"></path> </g></svg>
-            </button>
+          {productos.length > 0 ? (
+            productos.map((producto) => (
+              <Card key={producto.id} producto={producto} apiIp={apiIp} />
+            ))
+          ) : (
+            <p>Cargando productos...</p>
           )}
         </div>
+        {hayMasProductos && (
+          <div className="paginacion">
+            <button className="cta" onClick={() => setPagina((prevPagina) => prevPagina + 1)}>
+              Ver más
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
