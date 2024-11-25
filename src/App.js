@@ -18,7 +18,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div>
-        <Navbar setDarkMode={setDarkMode} darkMode={darkMode}/>
+        <Navbar apiIp={apiIp} setDarkMode={setDarkMode} darkMode={darkMode} />
         <Routes>
           <Route path="/" element={<Home apiIp={apiIp} />} />
           <Route path="/crear-producto" element={<CrearProducto apiIp={apiIp} />} />

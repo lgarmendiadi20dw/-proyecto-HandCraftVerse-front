@@ -17,25 +17,28 @@ const Login = ({ apiIp }) => {
     fetch(`${apiIp}member/login`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Credentials': 'true'
         },
-        body: JSON.stringify(usuario)
+        body: JSON.stringify(usuario),
+        credentials: 'include'
         
     })
     
     .then(response => response.json())
     .then(data => {
       try {
-        const parsedData = JSON.parse(JSON.stringify(data));
+        // const parsedData = JSON.parse(JSON.stringify(data));
       } catch (error) {
         console.error("Error parsing JSON:", error);
       }
       document.getElementById('mensaje').innerText = 'sesion iniciada exitosamente';
     })
     .catch((error) => {
-        document.getElementById('mensaje').innerText = 'Error al iniciar sesion';
+        document.getElementById('mensaje').innerText = 'Error al iniciar sesiocn';
         console.error('Error:', error);
     });
+    
 }
   return (
     
