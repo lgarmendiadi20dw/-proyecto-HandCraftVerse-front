@@ -1,91 +1,151 @@
 @import '../../styles/variables';
+
 .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $fondoOscuro;
+  padding: 2%;
+  height: 10vh;
+  position: relative;
+  z-index: 10;
+
+  .navbar-brand {
+    font-family: $titulos;
+    font-size: 20px;
+    font-weight: bold;
+    color: $letraFondoOscuro;
+
+    &:hover {
+      color: $colorTitulos;
+    }
+  }
+
+  .search-contenedor {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: $fondoOscuro;
-    padding: 2%;
-    height: 10vh;
-    position: relative;
-    z-index: 10;
-  
-    .navbar-brand {
-      font-family: $titulos;
-      font-size: 20px;
-      font-weight: bold;   
-      color: $letraFondoOscuro;
+    background-color: $fondoClaro;
+    border-radius: 25px;
+    padding: 5px 15px;
+    width: 300px;
+    height: 30px;
+
+    &:hover {
+      border: $letraFondoOscuro 1.8px solid;
+    }
+  }
+
+  .search-input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: transparent;
+    flex-grow: 1;
+    color: $letraFondoClaro;
+
+    &::placeholder {
+      color: $letraFondoClaro;
+    }
+  }
+
+  .search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    svg {
+      width: 20px;
+      stroke: none;
+      fill: $letraFondoClaro;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      cursor: pointer;
+
       &:hover {
-        color: $colorTitulos;
+        fill: $letraFondoOscuro;
       }
     }
+  }
 
-  
-    .search-contenedor {
-      display: flex;
-      align-items: center;
-      background-color: $fondoClaro;
-      border-radius: 25px;
-      padding: 5px 15px;
-      width: 300px;
-      height: 30px;
+  .navbar-icons {
+    display: flex;
+    gap: 1em;
+
+    .userIcon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+
       &:hover {
         border: $letraFondoOscuro 1.8px solid;
       }
     }
-  
-    .search-input {
-      border: none;
-      outline: none;
-      font-size: 16px;
-      background-color: transparent;
-      flex-grow: 1;
-      color: $letraFondoClaro;
-  
-      &::placeholder {
-        color: $letraFondoClaro;
-      }
 
-    }
-    .search-button {
-      background-color: transparent;
-      border: none;
+    svg {
+      width: 5rem;
+      height: 2rem;
+      stroke: $letraFondoOscuro;
+      stroke-width: 2em;
+      fill: none;
+      stroke-linecap: unset;
+      stroke-linejoin: initial;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      svg {
-        width: 20px;
-        stroke: none;
-        fill: $letraFondoClaro;
-  
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        cursor: pointer;
-        &:hover {
-          fill: $letraFondoOscuro;
-        
-        }
-      }
-    }
-  
-    .navbar-icons {
-      display: flex;
-      gap: 1em;
-  
-      svg {
-        width: 5rem;
-        height: 2rem;
-        stroke: $letraFondoOscuro;
-        stroke-width: 2em;
-        fill: none;
-        stroke-linecap: unset;
-        stroke-linejoin: initial;
-        cursor: pointer;
-        &:hover {
+
+      &:hover {
         stroke: none;
         fill: $colorTitulos;
+      }
+    }
+
+    .user-menu {
+      position: relative;
+      display: inline-block;
+
+      .userIcon {
+        cursor: pointer;
+      }
+
+      /* Mostrar el menú cuando el ratón está sobre el contenedor o el propio menú */
+      &:hover .menu-options {
+        display: block;
+      }
+
+      .menu-options {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: $fondoClaro;
+        border: 1px solid $letraFondoOscuro;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+        z-index: 1000;
+        display: none;
+
+        li {
+          padding: 10px 15px;
+          cursor: pointer;
+          color: $letraFondoOscuro;
+
+          &:hover {
+            background-color: $fondoClaro;
+            color: $colorTitulos;
+          }
+
+          a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+          }
         }
       }
     }
   }
+}
