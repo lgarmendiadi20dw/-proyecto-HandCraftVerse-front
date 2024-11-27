@@ -22,7 +22,7 @@ const Navbar = ({ apiIp }) => {
 
     const defaultImage = "/img/default-avatar.png"; // Imagen predeterminada
     const userImage = userData?.imagen ? `/img/${userData.imagen}` : defaultImage;
-    
+
 
   // Lógica para obtener los datos del usuario al iniciar sesión
   useEffect(() => {
@@ -38,7 +38,7 @@ const Navbar = ({ apiIp }) => {
         throw new Error('Error al obtener los datos del usuario');
       })
       .then((data) => setUserData(data)) // Establecer los datos del usuario en el estado
-      .catch((error) => console.error('Error al obtener los datos del usuario:', error));
+      .catch((error) => setUserData(null)); // Borrar los datos del usuario si hay un error
   }, [apiIp]);
 
     function cerrarSesion() {
@@ -93,15 +93,14 @@ const Navbar = ({ apiIp }) => {
                    {/* Contenido del dropdown */}
                    {isDropdownOpen && (
                      <div className="custom-dropdown-content">
-                       <label>
-                         <Link to="/perfil">Perfil</Link>
-                       </label>
-                       <label>
-                         <Link to="/configuracion">Configuración</Link>
-                       </label>
-                       <label className="danger" onClick={cerrarSesion}>
-                         <p >Cerrar sesión</p>
-                       </label>
+                       
+                         <Link to="/perfil" className="custom-dropdown-element">Perfil</Link>
+                       
+                         <Link to="/configuracion" className="custom-dropdown-element">Configuración</Link>
+                       
+                       <p className="custom-dropdown-element danger" onClick={cerrarSesion}>
+                         Cerrar sesión
+                       </p>
                      </div>
                    )}
                  </div>

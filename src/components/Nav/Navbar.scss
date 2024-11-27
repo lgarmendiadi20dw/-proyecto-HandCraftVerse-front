@@ -93,13 +93,7 @@
 
       // Contenedor del menú
       .custom-dropdown-content {
-        .danger{
-          color:$danger;
-          &:hover{
-            color: $fondo;
-            background-color: $danger;
-          }
-        }
+        
         display: none;
         position: absolute;
         background-color: $fondo;
@@ -111,19 +105,26 @@
         top:105%;
         transform: translateX(-55%);
 
-        label {
+        .custom-dropdown-element {
           display: block;
           padding: 10px 20px;
           color: $colorTexto;
           text-decoration: none;
-
+          
           &:hover {
-            background-color: rgba($colorTexto, 0.2);
+            background-color: rgba($colorTexto, 0.05);
           }
 
-          a {
-            color: inherit;
-            text-decoration: none;
+          // a {
+          //   color: inherit;
+          //   text-decoration: none;
+          // }
+        }
+        .danger{
+          color:$danger;
+          &:hover{
+            color: $fondo;
+            background-color: $danger;
           }
         }
       }

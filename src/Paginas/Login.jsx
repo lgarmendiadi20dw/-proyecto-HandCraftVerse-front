@@ -27,12 +27,8 @@ const Login = ({ apiIp }) => {
     
     .then(response => response.json())
     .then(data => {
-      try {
-        // const parsedData = JSON.parse(JSON.stringify(data));
-      } catch (error) {
-        console.error("Error parsing JSON:", error);
-      }
-      document.getElementById('mensaje').innerText = 'sesion iniciada exitosamente';
+      // document.getElementById('mensaje').innerText = 'sesion iniciada exitosamente';
+      window.location.href = "/";
     })
     .catch((error) => {
         document.getElementById('mensaje').innerText = 'Error al iniciar sesiocn';
