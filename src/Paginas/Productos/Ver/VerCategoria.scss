@@ -1,11 +1,5 @@
 @import "../../../styles/variables";
-.gridProductos {
-  display: grid;
 
-  grid-template-columns: repeat(6, 1fr);
-  grid-auto-rows: min-content;
-  gap: 2.15em;
-}
 
 .cta {
   border: none;
