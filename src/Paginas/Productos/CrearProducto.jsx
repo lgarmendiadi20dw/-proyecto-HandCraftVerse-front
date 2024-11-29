@@ -82,7 +82,7 @@ const CrearProducto = ({ apiIp }) => {
   };
 
   return (
-    <div className="container newProduct mt-6 flex justify-center items-center min-h-screen">
+    <div className="container newProduct ">
       <div className="  formulario ">
         <h2>Crear Producto</h2>
         <form onSubmit={enviarFormulario} className="formNewProduct">

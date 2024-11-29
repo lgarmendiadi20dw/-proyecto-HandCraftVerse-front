@@ -1,5 +1,5 @@
 import "./App.scss";
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Nav/Navbar";
@@ -9,14 +9,37 @@ import Registrar from "./Paginas/Registrar";
 import Home from "./Paginas/Home";
 import VerCategoria from "./Paginas/Productos/Ver/VerCategoria";
 import Sidebar from "./components/sidebar/Sidebar";
+import { AuthContext } from "./Context";
+
 
 
 const App = () => {
-  const apiIp = process.env.IP || 'https://localhost:8443/';
+  const apiIp = process.env.REACT_API_IP || 'https://localhost:8443/';
   const [darkMode, setDarkMode] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
+  useEffect(() => {
+    fetch(`${apiIp || 'https://localhost:8443/'}member/me3`, {
+      method: 'GET',
+      credentials: 'include', // Incluye las cookies de sesión
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();}
+        throw new Error('Error al obtener los datos del usuario');
+      })
+      .then((data) => setCurrentUser(data)) // Establecer los datos del usuario en el estado
+      .catch((error) => setCurrentUser(null)); // Borrar los datos del usuario si hay un error
+  }, [apiIp]);
+
+
+  console.log(currentUser);
   return (
     <BrowserRouter>
+    <AuthContext.Provider value={currentUser}>  
       <div>
         <Navbar apiIp={apiIp} setDarkMode={setDarkMode} darkMode={darkMode} />
         <Routes>
@@ -29,6 +52,7 @@ const App = () => {
           
         </Routes>
       </div>
+      </AuthContext.Provider>
     </BrowserRouter>
   );
 };

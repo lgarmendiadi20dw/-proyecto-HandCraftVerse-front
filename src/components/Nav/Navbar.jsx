@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
 import './Navbar.scss';
+import { AuthContext } from '../../Context';
 
 const Navbar = ({ apiIp }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [userData, setUserData] = useState(null);
+
+    const userData = useContext(AuthContext);
 
 
     const toggleTheme = () => {
@@ -24,22 +26,6 @@ const Navbar = ({ apiIp }) => {
     const userImage = userData?.imagen ? `/img/${userData.imagen}` : defaultImage;
 
 
-  // Lógica para obtener los datos del usuario al iniciar sesión
-  useEffect(() => {
-    fetch(`${apiIp || 'https://localhost:8443/'}member/me3`, {
-      method: 'GET',
-      credentials: 'include', // Incluye las cookies de sesión
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
-        throw new Error('Error al obtener los datos del usuario');
-      })
-      .then((data) => setUserData(data)) // Establecer los datos del usuario en el estado
-      .catch((error) => setUserData(null)); // Borrar los datos del usuario si hay un error
-  }, [apiIp]);
 
     function cerrarSesion() {
         fetch(`${apiIp}member/logout`, {
@@ -94,7 +80,7 @@ const Navbar = ({ apiIp }) => {
                    {isDropdownOpen && (
                      <div className="custom-dropdown-content">
                        
-                         <Link to="/perfil" className="custom-dropdown-element">Perfil</Link>
+                         <NavLink to="/perfil" className="custom-dropdown-element">Perfil</NavLink>
                        
                          <Link to="/configuracion" className="custom-dropdown-element">Configuración</Link>
                        
