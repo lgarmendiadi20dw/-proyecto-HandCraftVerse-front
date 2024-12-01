@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@import "../../../styles/_variables.scss";
 
 .formSesion{
   width: 450px;
@@ -6,4 +6,10 @@
         margin: 15px;
       }
       
+}
+.linkSesion{
+  color: $letraFondoClaro;
+  &:hover{
+    color: $letraFondoOscuro;
+  }
 }

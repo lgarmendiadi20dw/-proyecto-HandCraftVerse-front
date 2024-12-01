@@ -136,20 +136,22 @@
       }
     }
 
-    svg {
-
-        width: 5rem;
-        height: 2rem;
-      //  stroke: $letraFondoOscuro;
-      //  stroke-width: 2em;
-      //  fill: $letraFondoOscuro;
-      //  stroke-linecap: unset;
-      //  stroke-linejoin: initial;
-      //  cursor: pointer;
+    .svg-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+     
+        
+        stroke: $letraFondoOscuro;
+       stroke-width: 2px;
+        fill: none;
+       stroke-linecap: unset;
+       stroke-linejoin: initial;
+       cursor: pointer;
 
      
        &:hover {
          fill: $colorTitulos;
+         stroke:none;
       }
     }
   }

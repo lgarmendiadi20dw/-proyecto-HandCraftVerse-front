@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../../../components/inputs/Button";
 import Text from "../../../components/inputs/Text";
 import "./Sesion.scss";
+import { Link } from "react-router-dom";
 
 const Login = ({ apiIp }) => {
  
@@ -58,6 +59,9 @@ const Login = ({ apiIp }) => {
 
           <Button text="Iniciar Sesión" type="submit" />
         </form>
+        <p>
+        ¿Aún no tienes una cuenta? <Link to="/registrarse" className="linkSesion">Registrate ahora!</Link>
+      </p>
       </div>
     </div>
   );

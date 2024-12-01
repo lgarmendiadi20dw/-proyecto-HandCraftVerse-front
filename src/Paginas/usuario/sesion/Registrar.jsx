@@ -45,7 +45,7 @@ const Registrar = ({ apiIp }) => {
         <button type="submit">Registrar</button>
       </form>
       <p>
-        ¿Ya tienes una cuenta? <Link to="/iniciarSesion">Inicia sesión aquí</Link>
+        ¿Ya tienes una cuenta? <Link to="/iniciarSesion" className="linkSesion">Inicia sesión aquí</Link>
       </p>
     </div>
   );
