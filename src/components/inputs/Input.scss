@@ -34,34 +34,33 @@
 }
 
 .group {
-    position: relative;
-    
-  .input {
+  position: relative;
 
+  .input {
     font-size: 16px;
     padding: 10px 10px 10px 5px;
     display: block;
-    width: 200px;
+    width: 100%;
     border: none;
     border-bottom: 1px solid $fondoOscuro;
     background: transparent;
-  
+
     &:focus {
       outline: none;
     }
-  
+
     &:focus ~ label,
     &:valid ~ label {
       top: -10px;
       font-size: 16px;
       color: $letraFondoOscuro;
     }
-  
+
     &:focus ~ .bar:before,
     &:focus ~ .bar:after {
       width: 50%;
     }
-  
+
     &:focus ~ .highlight {
       animation: inputHighlighter 0.3s ease;
     }
@@ -72,7 +71,7 @@
       overflow: hidden;
     }
   }
-  
+
   label {
     color: #999;
     font-size: 18px;
@@ -84,14 +83,13 @@
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
-    
   }
-  
+
   .bar {
     position: relative;
     display: block;
-    width: 200px;
-  
+    width: 100%;
+
     &:before,
     &:after {
       content: '';
@@ -104,16 +102,16 @@
       -moz-transition: 0.2s ease all;
       -webkit-transition: 0.2s ease all;
     }
-  
+
     &:before {
       left: 50%;
     }
-  
+
     &:after {
       right: 50%;
     }
   }
-  
+
   .highlight {
     position: absolute;
     height: 60%;
@@ -123,7 +121,28 @@
     pointer-events: none;
     opacity: 0.5;
   }
+
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
   
+    .svg-icon {
+      width: 24px;
+      height: 24px;
+      fill: #999; // Cambia el color aquí
+      transition: fill 0.3s ease;
+  
+      &:hover {
+        fill: $letraFondoOscuro; // Cambia el color al pasar el mouse
+      }
+    }
+  }
+
   @keyframes inputHighlighter {
     from {
       background: $letraFondoOscuro;

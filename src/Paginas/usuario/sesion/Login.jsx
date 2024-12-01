@@ -1,6 +1,7 @@
 import React from "react";
-import Button from "../components/inputs/Button";
-import Text from "../components/inputs/Text";
+import Button from "../../../components/inputs/Button";
+import Text from "../../../components/inputs/Text";
+import "./Sesion.scss";
 
 const Login = ({ apiIp }) => {
  
@@ -41,7 +42,7 @@ const Login = ({ apiIp }) => {
     <div className="container mt-6 flex justify-center items-center min-h-screen">
       <div className="formulario">
         <h2>Iniciar Sesión</h2>
-        <form onSubmit={enviarFormulario} className="formLogin" name="login">
+        <form onSubmit={enviarFormulario} className="formSesion" name="login">
           <Text
             type="text"
             text="Nombre de Usuario"

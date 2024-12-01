@@ -137,18 +137,19 @@
     }
 
     svg {
-      width: 5rem;
-      height: 2rem;
-      stroke: $letraFondoOscuro;
-      stroke-width: 2em;
-      fill: none;
-      stroke-linecap: unset;
-      stroke-linejoin: initial;
-      cursor: pointer;
 
-      &:hover {
-        stroke: none;
-        fill: $colorTitulos;
+        width: 5rem;
+        height: 2rem;
+      //  stroke: $letraFondoOscuro;
+      //  stroke-width: 2em;
+      //  fill: $letraFondoOscuro;
+      //  stroke-linecap: unset;
+      //  stroke-linejoin: initial;
+      //  cursor: pointer;
+
+     
+       &:hover {
+         fill: $colorTitulos;
       }
     }
   }

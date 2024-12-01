@@ -4,8 +4,8 @@ import React, { useState , useEffect} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Nav/Navbar";
 import CrearProducto from "./Paginas/Productos/CrearProducto";
-import Login from "./Paginas/Login";
-import Registrar from "./Paginas/Registrar";
+import Login from "./Paginas/usuario/sesion/Login";
+import Registrar from "./Paginas/usuario/sesion/Registrar";
 import Home from "./Paginas/Home";
 import VerCategoria from "./Paginas/Productos/Ver/VerCategoria";
 import Sidebar from "./components/sidebar/Sidebar";
@@ -14,12 +14,12 @@ import { AuthContext } from "./Context";
 
 
 const App = () => {
-  const apiIp = process.env.REACT_API_IP || 'https://localhost:8443/';
+  const apiIp = process.env.REACT_API_IP || 'https://172.30.100.138:8443/';
   const [darkMode, setDarkMode] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    fetch(`${apiIp || 'https://localhost:8443/'}member/me3`, {
+    fetch(`${apiIp || 'https://172.30.100.138:8443/'}member/me3`, {
       method: 'GET',
       credentials: 'include', // Incluye las cookies de sesión
       headers: {
