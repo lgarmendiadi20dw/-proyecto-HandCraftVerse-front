@@ -9,7 +9,12 @@
     border-radius: 1rem;
     border: $bordeClaro;
     overflow: hidden;
-  
+  .dark & {
+      border: $bordeDarkClaro;
+      &:hover {
+        border: $bordeDarkOscuro;
+      }
+  }
     &:hover {
       border: $bordeOscuro;
       transform: scale(1.05);

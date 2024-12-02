@@ -19,9 +19,9 @@ $danger: #f84545;
 // Paleta modo oscuro
 
 // Paleta dark mode optimizada para no cansar la vista
-$fondoDark: #181818;                // Fondo principal, oscuro pero no negro puro
-$fondoDarkClaro: #232323;           // Fondo ligeramente más claro para elementos secundarios
-$fondoDarkOscuro: #121212;          // Fondo más oscuro para áreas profundas
+$fondoDark: #212121;                // Fondo principal, oscuro pero no negro puro
+$fondoDarkClaro: #424242;           // Fondo ligeramente más claro para elementos secundarios
+$fondoDarkOscuro: #2f2f2f;          // Fondo más oscuro para áreas profundas
 $letraFondoDarkClaro: #d8d2c5;      // Color de texto sobre fondos claros oscuros
 $letraFondoDarkOscuro: #eae5d9;     // Color de texto sobre fondos oscuros intensos
 
@@ -42,7 +42,10 @@ $sidebarFontSize: 18px;
 $fuenteLetra: "OpenDyslexic", sans-serif;
 
 //bordes
-$bordeClaro: $letraFondoClaro 1.8px solid;
-$bordeOscuro: $letraFondoOscuro 1.8px solid;
+$bordeClaro: $fondoClaro 1.8px solid;
+$bordeOscuro: $fondoOscuro 1.8px solid;
+
+$bordeDarkClaro: $fondoDarkClaro 1.8px solid;
+$bordeDarkOscuro: $fondoDarkOscuro 1.8px solid;
 
 

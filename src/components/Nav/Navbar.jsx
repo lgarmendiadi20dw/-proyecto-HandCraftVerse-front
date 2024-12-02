@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.scss";
 import { AuthContext } from "../../Context";
+import Cookies from 'js-cookie';
 
 import { ReactComponent as UserIcon } from "../../assets/svg/nav/user.svg";
 import { ReactComponent as Luna } from "../../assets/svg/nav/luna.svg";
@@ -14,13 +15,23 @@ const Navbar = ({ apiIp }) => {
 
     const userData = useContext(AuthContext);
 
+    useEffect(() => {
+        const darkModeCookie = Cookies.get('darkMode');
+        if (darkModeCookie) {
+            setIsDarkMode(true);
+            document.body.classList.add("dark");
+        }
+    }, []);
+
     const toggleTheme = () => {
         const newTheme = !isDarkMode;
         setIsDarkMode(newTheme);
         if (newTheme) {
             document.body.classList.add("dark");
+            Cookies.set('darkMode', 'true', { expires: 7 });
         } else {
             document.body.classList.remove("dark");
+            Cookies.remove('darkMode');
         }
     };
 
