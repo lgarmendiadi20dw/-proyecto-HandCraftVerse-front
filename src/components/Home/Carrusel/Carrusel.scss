@@ -11,14 +11,11 @@
 
     .carousel-item {
       display: flex; /* Para centrar los elementos */
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
 
       .custom-card {
-        width: auto;
-        max-width: 90%; /* Ajustar el tamaño de la tarjeta según sea necesario */
-        margin: auto;
+        width: 10rem; 
+        height: fit-content;
       }
     }
   }

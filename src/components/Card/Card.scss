@@ -27,7 +27,8 @@
     img {
       object-fit: cover;
       width: 100%;
-      height: auto;
+      height: 10rem;
+      border-bottom: rgba($colorTextoSecundario, .25) 1px solid;
     }
     .texto {
       padding: 2.5%;
