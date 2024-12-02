@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ReactComponent as OjoIcon } from "../../assets/svg/ojo.svg";
-import { ReactComponent as OjosCruzadosIcon } from "../../assets/svg/ojos-cruzados.svg";
+import { ReactComponent as OjoIcon } from "../../assets/svg/iconos/ojo.svg";
+import { ReactComponent as OjosCruzadosIcon } from "../../assets/svg/iconos/ojos-cruzados.svg";
 import "./Input.scss";
 
 const Text = ({ type, text, name, step, required }) => {
