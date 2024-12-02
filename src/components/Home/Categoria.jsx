@@ -26,7 +26,7 @@ const Categoria = ({ id, nombre, apiIp }) => {
 
   return (
     <div className="previewCategoria">
-      <h2 className="tituloEnPag">
+      <h2 className="tituloEnPag col-1">
         <span>
         <Link to={`/categoria/${nombre}`} className="textoTitulo">{nombre}</Link>
           <svg
@@ -38,7 +38,7 @@ const Categoria = ({ id, nombre, apiIp }) => {
           ></svg>
         </span>
       </h2>
-      <Carrusel productos={productos.map(producto => ({ ...producto, key: producto.id }))} apiIp={apiIp} />
+      <Carrusel productos={productos.map(producto => ({ ...producto, key: producto.id }))} apiIp={apiIp} className="col-12" />
     </div>
   );
 };

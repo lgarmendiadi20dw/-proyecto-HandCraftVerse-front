@@ -1,59 +1,57 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Carrusel.scss";
 import Card from "../../Card/Card";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const Carrusel = ({ apiIp, productos }) => {
-  useEffect(() => {
-    const carousels = document.querySelectorAll(".carousel-contenedor");
-
-    carousels.forEach((carousel) => {
-      const leftButton = carousel.querySelector(".boton-carrusel.left");
-      const rightButton = carousel.querySelector(".boton-carrusel.right");
-      const imgFlex = carousel.querySelector(".imgFlex");
-
-      leftButton.addEventListener("click", () => {
-        imgFlex.scrollBy({
-          left: -imgFlex.clientWidth,
-          behavior: "smooth",
-        });
-      });
-
-      rightButton.addEventListener("click", () => {
-        imgFlex.scrollBy({
-          left: imgFlex.clientWidth,
-          behavior: "smooth",
-        });
-      });
-    });
-
-    return () => {
-      carousels.forEach((carousel) => {
-        const leftButton = carousel.querySelector(".boton-carrusel.left");
-        const rightButton = carousel.querySelector(".boton-carrusel.right");
-        leftButton.removeEventListener("click", null);
-        rightButton.removeEventListener("click", null);
-      });
-    };
-  }, []);
-
   return (
-    <div className="carousel-contenedor">
-      <button
-        className="boton-carrusel left"
-        aria-label="Desplazar a la izquierda"
-      >
-        &#10094;
-      </button>
-      <div className="imgFlex">
-        {productos.map((producto) => (
-          <Card key={producto.id} producto={producto} apiIp={apiIp} />
+    <div id="carruselProductos" className="carousel slide" data-bs-ride="carousel">
+      {/* Indicadores opcionales */}
+      <div className="carousel-indicators">
+        {productos.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            data-bs-target="#carruselProductos"
+            data-bs-slide-to={index}
+            className={index === 0 ? "active" : ""}
+            aria-current={index === 0 ? "true" : undefined}
+            aria-label={`Slide ${index + 1}`}
+          ></button>
         ))}
       </div>
+
+      {/* Contenido del carrusel */}
+      <div className="carousel-inner">
+        {productos.map((producto, index) => (
+          <div
+            key={producto.id}
+            className={`carousel-item ${index === 0 ? "active" : ""}`}
+          >
+            <Card producto={producto} apiIp={apiIp} />
+          </div>
+        ))}
+      </div>
+
+      {/* Controles de navegación */}
       <button
-        className="boton-carrusel right"
-        aria-label="Desplazar a la derecha"
+        className="carousel-control-prev"
+        type="button"
+        data-bs-target="#carruselProductos"
+        data-bs-slide="prev"
       >
-        &#10095;
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Anterior</span>
+      </button>
+      <button
+        className="carousel-control-next"
+        type="button"
+        data-bs-target="#carruselProductos"
+        data-bs-slide="next"
+      >
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Siguiente</span>
       </button>
     </div>
   );

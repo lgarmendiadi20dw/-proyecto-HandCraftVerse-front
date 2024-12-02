@@ -27,7 +27,7 @@ const Card = ({ apiIp, producto }) => {
     }, [id, apiIp]);
 
     return (
-        <div className="card">
+        <div className="custom-card">
             <img alt={nombre} src={imagen} />
             <div className="texto">
                 <p className="nombre">{nombre}</p>

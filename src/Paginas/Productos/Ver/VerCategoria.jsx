@@ -32,7 +32,7 @@ const VerCategoria = ({ apiIp }) => {
   return (
     <div className="containerSidebar">
       <Sidebar apiIp={apiIp} />
-      <div className="container pt-6 conNavLateral p-10">
+      <div className=" tw-pt-6 conNavLateral tw-p-10">
         <h1 className="textoTitulo">{nombre}</h1>
         <GridProductos productos={productos} apiIp={apiIp} /> {/* Usar el nuevo componente */}
       </div>

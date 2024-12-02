@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.scss";
 import { AuthContext } from "../../Context";
-import Cookies from 'js-cookie';
 
 import { ReactComponent as UserIcon } from "../../assets/svg/nav/user.svg";
 import { ReactComponent as Luna } from "../../assets/svg/nav/luna.svg";
 import { ReactComponent as Sol } from "../../assets/svg/nav/sol.svg";
+import { ReactComponent as Corazon } from "../../assets/svg/nav/corazon.svg";
 
 const Navbar = ({ apiIp }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -15,23 +15,13 @@ const Navbar = ({ apiIp }) => {
 
     const userData = useContext(AuthContext);
 
-    useEffect(() => {
-        const darkModeCookie = Cookies.get('darkMode');
-        if (darkModeCookie) {
-            setIsDarkMode(true);
-            document.body.classList.add("dark");
-        }
-    }, []);
-
     const toggleTheme = () => {
         const newTheme = !isDarkMode;
         setIsDarkMode(newTheme);
         if (newTheme) {
             document.body.classList.add("dark");
-            Cookies.set('darkMode', 'true', { expires: 7 });
         } else {
             document.body.classList.remove("dark");
-            Cookies.remove('darkMode');
         }
     };
 
@@ -60,12 +50,12 @@ const Navbar = ({ apiIp }) => {
     };
 
     return (
-        <nav className="navbar">
-            <h1 className="navbar-brand">
+        <nav className="custom-navbar">
+            <h1 className="custom-navbar-brand">
                 <Link to="/">HandCraftVerse</Link>
             </h1>
 
-            <h1 className="navbar-brand">
+            <h1 className="custom-navbar-brand">
                 <Link to="/crear-producto">Producto</Link>
             </h1>
 
@@ -85,7 +75,8 @@ const Navbar = ({ apiIp }) => {
                 </button>
             </div>
 
-            <div className="navbar-icons">
+            <div className="custom-navbar-icons">
+                <Corazon className="svg-icon" />
                 {isDarkMode ? (
                     <Sol onClick={toggleTheme} className="svg-icon" />
                 ) : (

@@ -7,7 +7,7 @@ import { ReactComponent as Email } from "../../assets/svg/iconos/email.svg";
 const Perfil = () => {
   const userData = useContext(AuthContext);
   return (
-    <div className="container newProduct mt-6 flex justify-center items-center">
+    <div className="container newProduct tw-mt-6 tw-flex tw-justify-center tw-items-center">
       <div className="  formulario ">
         <div>
           <img src={`/img/${userData.imagen}`} alt="Avatar" className="userImagePerfil"/>

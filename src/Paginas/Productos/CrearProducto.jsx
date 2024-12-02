@@ -82,7 +82,7 @@ const CrearProducto = ({ apiIp }) => {
   };
 
   return (
-    <div className="container newProduct mt-6 flex justify-center items-center">
+    <div className="container newProduct tw-mt-6 tw-flex tw-justify-center tw-items-center">
       <div className="  formulario ">
         <h1 className="textoTitulo">Nuevo Producto</h1>
 

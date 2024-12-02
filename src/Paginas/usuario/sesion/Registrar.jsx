@@ -41,7 +41,7 @@ const Registrar = ({ apiIp }) => {
 }
   return (
     
-    <div className="container mt-6 flex justify-center items-center min-h-screen">
+    <div className="container tw-mt-6 tw-flex tw-justify-center tw-items-center min-h-screen">
       <div className="formulario">
         <h2>Iniciar Sesión</h2>
         <form onSubmit={enviarFormulario} className="formSesion" name="login">
