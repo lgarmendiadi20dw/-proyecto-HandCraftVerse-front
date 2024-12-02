@@ -13,18 +13,27 @@ $letraFondoOscuro: #4a3a2b;
 
 $colorTitulos: #6d4c41;
 $colorTexto: #252525;
+$colorTextoSecundario: #999;
 $danger: #f84545;
 
 // Paleta modo oscuro
 
-$fondoDarkMode: #121212;
-$fondoClaroDarkMode: #2a2a2a;
-$fondoOscuroDarkMode: #1e1e1e;
-$letraFondoClaroDarkMode: #e0c9a6;
-$letraFondoOscuroDarkMode: #d8c0a3;
+// Paleta dark mode optimizada para no cansar la vista
+$fondoDark: #181818;                // Fondo principal, oscuro pero no negro puro
+$fondoDarkClaro: #232323;           // Fondo ligeramente más claro para elementos secundarios
+$fondoDarkOscuro: #121212;          // Fondo más oscuro para áreas profundas
+$letraFondoDarkClaro: #d8d2c5;      // Color de texto sobre fondos claros oscuros
+$letraFondoDarkOscuro: #eae5d9;     // Color de texto sobre fondos oscuros intensos
 
-$colorTitulosDarkMode: #f4e1c1;
-$colorTextoDarkMode: #e5e5e5;
+$colorTitulosDark: #c1a37c;         // Color cálido para títulos
+$colorTextoDark: #cccccc;           // Color principal para texto, gris claro
+$colorTextoSecundarioDark: #8a8a8a; // Texto secundario con menos contraste, pero legible
+$dangerDark: #ff7575;               // Rojo peligro, ligeramente suavizado pero vibrante
+
+// // Extras para evitar cansancio visual
+// $enfasisDark: #7ba7b8;              // Azul suave para enlaces o énfasis
+// $colorExitoDark: #7cb489;           // Verde pastel para mensajes de éxito
+
 
 
 //letra

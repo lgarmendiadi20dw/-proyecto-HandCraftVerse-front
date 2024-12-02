@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Input.scss";
 
-const TextArea = ({ text, name }) => {
+const TextArea = ({ text, name, required  }) => {
   const [height, setHeight] = useState("45px");
   const textAreaRef = useRef(null);
 
@@ -18,7 +18,8 @@ const TextArea = ({ text, name }) => {
     <div className="group">
       <textarea
         ref={textAreaRef}
-        required
+        required={required}
+        placeholder=""
         name={name}
         id={name}
         className="input textarea"
@@ -26,7 +27,9 @@ const TextArea = ({ text, name }) => {
         onInput={handleInput}
       />
       <span className="bar" />
-      <label htmlFor={name}>{text}</label>
+      <label htmlFor={name}>
+          {text} {required && <span className="obligatorio">*</span>}
+        </label>
     </div>
   );
 };

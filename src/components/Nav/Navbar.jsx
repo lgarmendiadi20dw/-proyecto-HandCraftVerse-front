@@ -4,7 +4,8 @@ import "./Navbar.scss";
 import { AuthContext } from "../../Context";
 
 import { ReactComponent as UserIcon } from "../../assets/svg/nav/user.svg";
-import { ReactComponent as Moon } from "../../assets/svg/nav/luna.svg";
+import { ReactComponent as Luna } from "../../assets/svg/nav/luna.svg";
+import { ReactComponent as Sol } from "../../assets/svg/nav/sol.svg";
 
 const Navbar = ({ apiIp }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -16,10 +17,11 @@ const Navbar = ({ apiIp }) => {
     const toggleTheme = () => {
         const newTheme = !isDarkMode;
         setIsDarkMode(newTheme);
-        document.documentElement.setAttribute(
-            "data-theme",
-            newTheme ? "dark" : "light"
-        );
+        if (newTheme) {
+            document.body.classList.add("dark");
+        } else {
+            document.body.classList.remove("dark");
+        }
     };
 
     const toggleDropdown = () => {
@@ -73,9 +75,11 @@ const Navbar = ({ apiIp }) => {
             </div>
 
             <div className="navbar-icons">
-                
-                <Moon  onClick={toggleTheme}className="svg-icon" />
-
+                {isDarkMode ? (
+                    <Sol onClick={toggleTheme} className="svg-icon" />
+                ) : (
+                    <Luna onClick={toggleTheme} className="svg-icon" />
+                )}
                 {userData ? (
                     <div className="custom-dropdown">
                         <div id="perfilButton" onClick={toggleDropdown}>

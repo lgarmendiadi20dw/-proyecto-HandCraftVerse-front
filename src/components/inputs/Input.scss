@@ -49,11 +49,16 @@
       outline: none;
     }
 
-    &:focus ~ label,
-    &:valid ~ label {
+    
+    &:not(:placeholder-shown) ~ label,
+    &:focus ~ label{
       top: -10px;
       font-size: 16px;
       color: $letraFondoOscuro;
+      .obligatorio {
+        color: $danger;
+        
+      }
     }
 
     &:focus ~ .bar:before,
@@ -73,7 +78,7 @@
   }
 
   label {
-    color: #999;
+    color: $colorTextoSecundario;
     font-size: 18px;
     font-weight: normal;
     position: absolute;
@@ -83,6 +88,10 @@
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
+    .obligatorio & {
+      color: $colorTextoSecundario;
+      
+    }
   }
 
   .bar {
@@ -101,6 +110,7 @@
       transition: 0.2s ease all;
       -moz-transition: 0.2s ease all;
       -webkit-transition: 0.2s ease all;
+      
     }
 
     &:before {

@@ -142,7 +142,7 @@
      
         
         stroke: $letraFondoOscuro;
-       stroke-width: 2px;
+       stroke-width: 3em;
         fill: none;
        stroke-linecap: unset;
        stroke-linejoin: initial;
@@ -151,8 +151,8 @@
      
        &:hover {
          fill: $colorTitulos;
-         stroke:none;
-      }
+         stroke: $colorTitulos;
+        }
     }
   }
 }

@@ -29,6 +29,9 @@
       font-size: 16px;
       color: $letraFondoOscuro;
       padding: 10px 10px 10px 5px;
+      .obligatorio {
+        color: $danger;
+      }
     }
 
     &:hover .custom-dropdown-content {

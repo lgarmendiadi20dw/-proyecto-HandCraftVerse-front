@@ -84,13 +84,14 @@ const CrearProducto = ({ apiIp }) => {
   return (
     <div className="container newProduct mt-6 flex justify-center items-center">
       <div className="  formulario ">
-        <h2>Crear Producto</h2>
+        <h1 className="textoTitulo">Nuevo Producto</h1>
+
         <form onSubmit={enviarFormulario} className="formNewProduct">
-          <Text type="text" text="Vendedor ID" name="vendedorId" />
-          <Text type="text" text="Nombre del producto" name="nombre" />
-          <Text type="number" text="Precio" name="precio" step="0.01" />
-          <Text type="number" text="Stock" name="stock" />
-          <TextArea text="Descripción" name="descripcion" />
+          <Text type="text" text="Vendedor ID" name="vendedorId" required={true} />
+          <Text type="text" text="Nombre del producto" name="nombre" required={true} />
+          <Text type="number" text="Precio" name="precio" step="0.01" required={true} />
+          <Text type="number" text="Stock" name="stock" required={true} />
+          <TextArea text="Descripción" name="descripcion" required={true} />
 
           {/* Dropdown de categorías */}
           <div
@@ -98,7 +99,7 @@ const CrearProducto = ({ apiIp }) => {
               openDropdown === "categorias" ? "active" : "inactive"
             }`}
           >
-            <label htmlFor="categorias">Categorías:</label>
+            <label htmlFor="categorias">Categorías <span className="obligatorio">*</span></label>
             <div
               id="selectionButtonCategorias"
               className={`selection-button ${
@@ -132,7 +133,7 @@ const CrearProducto = ({ apiIp }) => {
               openDropdown === "colores" ? "active" : "inactive"
             }`}
           >
-            <label htmlFor="colores">Colores:</label>
+            <label htmlFor="colores">Colores <span className="obligatorio">*</span></label>
             <div
               id="selectionButtonColores"
               className={`selection-button ${

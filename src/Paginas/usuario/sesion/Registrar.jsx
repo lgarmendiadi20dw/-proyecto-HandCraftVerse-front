@@ -1,52 +1,89 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Button from "../../../components/inputs/Button";
+import Text from "../../../components/inputs/Text";
+import "./Sesion.scss";
+import { Link } from "react-router-dom";
 
 const Registrar = ({ apiIp }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  function enviarFormulario(event) {
+    event.preventDefault(); // Evitar comportamiento por defecto
+    
+    const usuario = {
+        "username": document.login.username.value,
+        "email": document.login.email.value,
+        "emailConfirm": document.login.emailConfirm.value,
+        "password": document.login.password.value,
+        "passwordConfirm": document.login.passwordConfirm.value
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Lógica para manejar el registro
-  };
-
+    // Aquí puedes descomentar el fetch para hacer el envío de datos:
+    fetch(`${apiIp}member/registrar`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Credentials': 'true'
+        },
+        body: JSON.stringify(usuario),
+        credentials: 'include'
+        
+    })
+    
+    .then(response => response.json())
+    .then(data => {
+      // document.getElementById('mensaje').innerText = 'sesion iniciada exitosamente';
+      window.location.href = "/";
+    })
+    .catch((error) => {
+        document.getElementById('mensaje').innerText = 'Error al iniciar sesiocn';
+        console.error('Error:', error);
+    });
+    
+}
   return (
-    <div>
-      <h2>Registrar</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nombre:</label>
-          <input
+    
+    <div className="container mt-6 flex justify-center items-center min-h-screen">
+      <div className="formulario">
+        <h2>Iniciar Sesión</h2>
+        <form onSubmit={enviarFormulario} className="formSesion" name="login">
+          <Text
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
+            text="Nombre de Usuario"
+            name="username"
+            required={true}
           />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+           <Text
+            type="text"
+            text="Email"
+            name="email"
+            required={true}
           />
-        </div>
-        <div>
-          <label>Contraseña:</label>
-          <input
+          <Text
+            type="text"
+            text="Confirmar email"
+            name="emailConfirm"
+            required={true}
+          />
+          <Text
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            text="Contraseña"
+            name="password"
+            required={true}
           />
-        </div>
-        <button type="submit">Registrar</button>
-      </form>
-      <p>
-        ¿Ya tienes una cuenta? <Link to="/iniciarSesion" className="linkSesion">Inicia sesión aquí</Link>
+          <Text
+            type="password"
+            text="Confirmar contraseña"
+            name="passwordConfirm"
+            required={true}
+          />
+          
+          <div id="mensaje" className="mt-3"></div>
+
+          <Button text="Registrarse" type="submit" />
+        </form>
+        <p>
+        ¿Ya tienes una cuenta? <Link to="/iniciarSesion" className="linkSesion">Inicia sesión ahora!</Link>
       </p>
+      </div>
     </div>
   );
 };

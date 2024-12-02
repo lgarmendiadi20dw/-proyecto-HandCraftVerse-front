@@ -53,6 +53,8 @@ const Login = ({ apiIp }) => {
             type="password"
             text="Contraseña"
             name="password"
+            required={true}
+
           />
           
           <div id="mensaje" className="mt-3"></div>
