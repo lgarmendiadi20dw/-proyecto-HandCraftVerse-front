@@ -73,7 +73,7 @@ const CrearProducto = ({ apiIp }) => {
 
       if (!response.ok) throw new Error("Error al crear el producto");
 
-      const result = await response.json();
+      // const result = await response.json();
       document.getElementById("mensaje").innerText = "Producto creado exitosamente";
     } catch (error) {
       document.getElementById("mensaje").innerText = "Error al crear el producto";

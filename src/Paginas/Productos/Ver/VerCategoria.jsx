@@ -7,7 +7,7 @@ import "./VerCategoria.scss";
 const VerCategoria = ({ apiIp }) => {
   const { nombre } = useParams(); // Obtener el nombre de la categoría desde la URL.
   const [productos, setProductos] = useState([]); // Lista de productos.
-  const productosPorPagina = 18; // Número de productos por página.
+  const productosPorPagina = 10; // Número de productos por página.
 
   // Función para cargar productos desde el API.
   const cargarProductos = useCallback(() => {

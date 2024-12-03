@@ -1,77 +1,61 @@
 @import '../../../styles/variables.scss';
 
-.carousel {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
 
-  .carousel-inner {
-    display: flex;
-    align-items: center;
 
-    .carousel-item {
-      display: flex; /* Para centrar los elementos */
-      flex-direction: column;
-
+.carousel-contenedor {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  
+    .imgFlex {
+      display: flex;
+      scroll-snap-type: x mandatory;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+  
       .custom-card {
-        width: 10rem; 
-        height: fit-content;
+        flex: none;
+        width: 12rem;
       }
     }
-  }
+  
+    .boton-carrusel {
 
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 2.5%;
-    height: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: $fondoClaro;
-    border-radius: 50%;
-    padding: 10px;
-
-    &:hover {
-      background-color: $fondoOscuro;
-      color: $letraFondoOscuro;
-    }
-
-    &-icon {
-      /* Cambiar color de las flechas a rojo */
-      background-color: transparent; /* Para mantener el diseño limpio */
-      mask-image: none; /* Remover máscaras si es necesario */
-      color: red; /* Aquí se establece el color de las flechas */
-      fill: red; /* Si el ícono utiliza SVG */
-
-      /* Cambiar colores en modo oscuro */
       body.dark & {
-        color: red; /* Asegurar que sigue siendo rojo en modo oscuro */
-      }
-    }
-  }
+        background-color:  rgba($fondoDarkClaro, 0.5);
 
-  .carousel-indicators {
-    bottom: -15px; /* Ajustar si los indicadores están muy cerca */
-
-    button {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: $fondoClaro;
-      border: none;
-      margin: 0 5px;
-
-      &.active {
-        background-color: $fondoOscuro;
-      }
-
-      /* Cambiar colores en modo oscuro */
-      body.dark & {
-        background-color: $fondoOscuro;
-
-        &.active {
-          background-color: lighten($fondoOscuro, 15%); /* Ajusta para destacar */
+        color: $letraFondoDarkClaro;
+        &:hover {
+          background-color: $fondoDarkOscuro;
+          color: $letraFondoDarkOscuro;
         }
       }
+      position: absolute;
+      width: 2em;
+      height: 2em;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color:  rgba($fondoClaro, 0.5);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+  color: $letraFondoClaro;
+  font-size: 14px;
+      &.left {
+        margin-left: 1%;
+        left: 10px;
+        
+      }
+  
+      &.right {
+        right: 10px;
+      }
+  
+      &:hover {
+        background-color: $fondoOscuro;
+        color: $letraFondoOscuro;
+      }
     }
   }
-}

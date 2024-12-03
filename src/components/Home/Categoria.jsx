@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import Carrusel from "./Carrusel/Carrusel";
 import { Link } from "react-router-dom";
 
-const Categoria = ({ id, nombre, apiIp }) => {
+const Categoria = ({  nombre, apiIp }) => {
   const [productos, setProductos] = useState([]);
 
   const cargarProductos = useCallback(() => {
@@ -20,7 +20,7 @@ const Categoria = ({ id, nombre, apiIp }) => {
 
   useEffect(() => {
     cargarProductos();
-  }, [id, cargarProductos]); // Asegúrate de incluir cargarProductos en la lista de dependencias
+  }, [ cargarProductos]); // Asegúrate de incluir cargarProductos en la lista de dependencias
 
   if (productos.length === 0) return null;
 

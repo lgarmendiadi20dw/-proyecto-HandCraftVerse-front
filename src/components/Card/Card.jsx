@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Card.scss';
 
 const unnamedImage = '/img/unnamed.png';
@@ -27,13 +28,13 @@ const Card = ({ apiIp, producto }) => {
     }, [id, apiIp]);
 
     return (
-        <div className="custom-card">
+        <Link to={`/producto/${id}`} className="custom-card">
             <img alt={nombre} src={imagen} />
             <div className="texto">
                 <p className="nombre">{nombre}</p>
                 <p className="precio">{precio}€</p>
             </div>
-        </div>
+        </Link>
     );
 }
 

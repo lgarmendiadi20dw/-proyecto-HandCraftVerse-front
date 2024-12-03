@@ -26,7 +26,7 @@ const Home = ({ apiIp }) => {
   return (
     <div className="container mt-6 ">
       {categorias.map(categoria => (
-        <Categoria key={categoria.id} {...categoria} apiIp={apiIp} />
+        <Categoria  {...categoria} apiIp={apiIp} />
       ))}
     </div>
   );

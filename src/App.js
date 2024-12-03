@@ -1,5 +1,5 @@
 import "./App.scss";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Nav/Navbar";
@@ -9,8 +9,12 @@ import Registrar from "./Paginas/usuario/sesion/Registrar";
 import Home from "./Paginas/Home";
 import VerCategoria from "./Paginas/Productos/Ver/VerCategoria";
 import Sidebar from "./components/sidebar/Sidebar";
-import Perfil from "./Paginas/usuario/Perfil";
+import VerProducto from "./Paginas/Productos/verProducto/VerProducto";
+
+
 import { AuthContext } from "./Context";
+
+const Perfil = lazy(() => import("./Paginas/usuario/Perfil"));
 
 const App = () => {
   const apiIp = process.env.REACT_API_IP || "https://localhost:8443/";
@@ -35,7 +39,6 @@ const App = () => {
       .catch((error) => setCurrentUser(null)); // Borrar los datos del usuario si hay un error
   }, [apiIp]);
 
-  console.log(currentUser);
   return (
     <BrowserRouter>
       <AuthContext.Provider value={currentUser}>
@@ -49,12 +52,17 @@ const App = () => {
 
             <Route path="/crear-producto" element={<CrearProducto apiIp={apiIp} />}/>
             <Route path="/categoria/:nombre" element={<VerCategoria apiIp={apiIp} />}/>
+            <Route path="/producto/:id" element={<VerProducto apiIp={apiIp} />} />
 
             {/* usuarios */}
 
             <Route path="/iniciarSesion" element={<Login apiIp={apiIp} />} />
             <Route path="/registrarse" element={<Registrar apiIp={apiIp} />} />
-            <Route path="/perfil" element={<Perfil apiIp={apiIp} />} />
+            <Route path="/perfil" element={
+              <Suspense fallback={<div>Cargando...</div>}>
+                {currentUser ? <Perfil apiIp={apiIp} /> : <div>Cargando datos del usuario...</div>}
+              </Suspense>
+            } />
 
             <Route element={<Sidebar apiIp={apiIp} />} />
           </Routes>
