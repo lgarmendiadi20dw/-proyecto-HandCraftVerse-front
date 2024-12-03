@@ -23,6 +23,27 @@
       }
     }
   
+    body.dark &{
+      background-color: $fondoDarkClaro;
+      a {
+        color: $letraFondoDarkClaro;
+        &:hover {
+          color: $letraFondoDarkOscuro;
+        }
+      }
+      .filtroPrecio {
+        .field {
+          color:$letraFondoDarkOscuro;
+          input {
+            border: $bordeDarkClaro;
+            &:focus {
+              border-color: $letraFondoDarkClaro;
+              box-shadow: 0 0 0 0.2rem rgba($letraFondoDarkClaro, 0.5);
+            }
+          }
+        }
+      }
+    }
     .filtroPrecio {
       width: 100%;
       display: flex;
