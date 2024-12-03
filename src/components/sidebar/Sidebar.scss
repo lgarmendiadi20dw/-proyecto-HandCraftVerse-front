@@ -36,6 +36,7 @@
           color:$letraFondoDarkOscuro;
           input {
             border: $bordeDarkClaro;
+            background-color: $fondoDarkClaro;
             &:focus {
               border-color: $letraFondoDarkClaro;
               box-shadow: 0 0 0 0.2rem rgba($letraFondoDarkClaro, 0.5);
