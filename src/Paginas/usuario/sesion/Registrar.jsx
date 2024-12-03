@@ -78,11 +78,20 @@ const Registrar = ({ apiIp }) => {
           
           <div id="mensaje" className="mt-3"></div>
 
-          <Button text="Registrarse" type="submit" />
-        </form>
-        <p>
+          <div className="row">
+  <p className="col-7">
         ¿Ya tienes una cuenta? <Link to="/iniciarSesion" className="linkSesion">Inicia sesión ahora!</Link>
       </p>
+      <div className="col-5">
+      <Button text="Registrarse" type="submit" />
+
+      </div>
+
+</div>
+
+          
+        </form>
+        
       </div>
     </div>
   );

@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
+import ProductoImagen from "./ProductoImagen";
+import ProductoCarrusel from "./ProductoCarrusel";
 import "./VerProducto.scss";
-// import { AuthContext } from "../../../Context";
-
 
 const VerProducto = ({ apiIp }) => {
   const { id } = useParams();
-  // const userData = useContext(AuthContext);
   const [producto, setProducto] = useState();
 
   const cargarProducto = useCallback(() => {
@@ -24,11 +23,25 @@ const VerProducto = ({ apiIp }) => {
   useEffect(() => {
     cargarProducto();
   }, [id, cargarProducto]);
-  console.log(producto);
+
+  if (!producto) return <p>Cargando producto...</p>;
+
+  const { multimedia } = producto;
 
   return (
     <div className="container">
-      {/* Renderiza los detalles del producto aquí */}
+      <div className="row">
+        <div className="col-6">
+          {multimedia.length === 1 ? (
+            <ProductoImagen
+              src={`/img/${multimedia[0].nombreArchivo}`}
+              alt={multimedia[0].alt}
+            />
+          ) : (
+            <ProductoCarrusel multimedia={multimedia} />
+          )}
+        </div>
+      </div>
     </div>
   );
 };

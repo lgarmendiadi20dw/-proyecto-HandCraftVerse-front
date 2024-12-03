@@ -1,19 +1,27 @@
 @import "../../styles/variables.scss";
 
+
 .boton {
   display: flex;
   height: 3em;
-  width: 100px;
+  padding: 1%;
+  padding-left: 5%;
+  padding-right: 5%;
   align-items: center;
   justify-content: center;
-  background-color: #eeeeee4b;
-  border-radius: 3px;
+  border-radius: 2rem;
   letter-spacing: 1px;
   transition: all 0.2s linear;
   cursor: pointer;
   border: none;
-  background: $fondoClaro;
-
+  background: $fondoOscuro;
+body.dark & {
+    background: $letraFondoDarkClaro;
+    &:hover{
+    
+      background: $letraFondoDarkOscuro;
+    }
+  }
   & > svg {
     margin-right: 5px;
     margin-left: 5px;
@@ -27,8 +35,7 @@
   }
 
   &:hover {
-    box-shadow: 9px 9px 33px $fondoOscuro, -9px -9px 33px $fondoClaro;
-    background-color: $fondoOscuro;
+   background-color: $fondoOscuro;
     transform: translateY(-2px);
   }
 }

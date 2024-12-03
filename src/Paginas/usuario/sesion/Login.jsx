@@ -59,11 +59,18 @@ const Login = ({ apiIp }) => {
           
           <div id="mensaje" className="mt-3"></div>
 
-          <Button text="Iniciar Sesión" type="submit" />
-        </form>
-        <p>
+<div className="row">
+  <p className="col-7">
         ¿Aún no tienes una cuenta? <Link to="/registrarse" className="linkSesion">Registrate ahora!</Link>
       </p>
+      <div className="col-5">
+      <Button text="Iniciar Sesión" type="submit" />
+
+      </div>
+
+</div>
+        </form>
+        
       </div>
     </div>
   );
