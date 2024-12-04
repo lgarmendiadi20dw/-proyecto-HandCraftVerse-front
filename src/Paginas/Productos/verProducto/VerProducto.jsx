@@ -1,12 +1,21 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import ProductoImagen from "./ProductoImagen";
-import ProductoCarrusel from "./ProductoCarrusel";
+
+import { ReactComponent as PrevIcon } from "../../../assets/svg/iconCarrusel/prev-icon.svg";
+import { ReactComponent as NextIcon } from "../../../assets/svg/iconCarrusel/next-icon.svg";
+
+import Carousel from "react-bootstrap/Carousel";
 import "./VerProducto.scss";
 
 const VerProducto = ({ apiIp }) => {
   const { id } = useParams();
   const [producto, setProducto] = useState();
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
 
   const cargarProducto = useCallback(() => {
     fetch(`${apiIp}productos/${id}`, {
@@ -29,16 +38,32 @@ const VerProducto = ({ apiIp }) => {
   const { multimedia } = producto;
 
   return (
-    <div className="container">
+    <div className="container tw-mt-6">
       <div className="row">
-        <div className="col-6">
-          {multimedia.length === 1 ? (
+        <div className="col-4 verProducto">
+          {multimedia.length > 1 ? (
+            <Carousel
+              prevIcon={<PrevIcon className="carruselIcon" />}
+              nextIcon={<NextIcon className="carruselIcon" />}
+              activeIndex={index}
+              onSelect={handleSelect}
+              interval={null} // Desactiva el cambio automático
+            >
+              {multimedia.map((item, idx) => (
+                <Carousel.Item key={idx}>
+                  <ProductoImagen
+                    src={`/img/${item.nombreArchivo}`}
+                    alt={item.alt || `Imagen ${idx + 1}`}
+                  />
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          ) : (
+            // Si solo hay una imagen, se muestra solo un ProductoImagen
             <ProductoImagen
               src={`/img/${multimedia[0].nombreArchivo}`}
-              alt={multimedia[0].alt}
+              alt={multimedia[0].alt || "Imagen del producto"}
             />
-          ) : (
-            <ProductoCarrusel multimedia={multimedia} />
           )}
         </div>
       </div>
