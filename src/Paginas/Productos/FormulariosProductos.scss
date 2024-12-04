@@ -122,3 +122,45 @@
     width: 75rem;
   }
 }
+
+.custum-file-upload {
+  height: 200px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed $colorTextoSecundario;
+  background-color: $fondo;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0, 0, 0, 0.1);
+
+  & .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & svg {
+      height: 80px;
+      fill: rgba(75, 85, 99, 1);
+    }
+  }
+  & .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & span {
+      font-weight: 400;
+      color: rgba(75, 85, 99, 1);
+    }
+  }
+
+  & input {
+    display: none;
+  }
+}
