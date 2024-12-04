@@ -1,0 +1,48 @@
+@import '../../styles/variables';
+
+footer {
+  background-color: $fondoOscuro;
+  color: $letraFondoOscuro;
+  margin-top: 5%;
+  
+  @media (max-width: 768px) {
+    text-align: center;
+    .row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    ul, li {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+  }
+
+  p, a {
+    color: $letraFondoClaro;
+  }
+
+  a {
+    &:hover {
+      color: $letraFondoOscuro;
+text-decoration: underline;  
+
+    }
+  }
+
+  body.dark &{
+    background-color: $fondoDarkOscuro;
+    color: $letraFondoDarkOscuro;
+    p{
+        color: $colorTextoDark;
+    }
+    a {
+      color: $colorTextoDark;
+      &:hover {
+        color: $colorTitulosDark;
+      }
+    }
+  }
+}

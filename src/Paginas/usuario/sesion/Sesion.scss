@@ -8,8 +8,16 @@
       
 }
 .linkSesion{
+  font-weight: bold;
   color: $letraFondoClaro;
   &:hover{
     color: $letraFondoOscuro;
+text-decoration: underline;  
+}
+  .dark &{
+    color: $letraFondoDarkClaro;
+    &:hover{
+      color: $letraFondoDarkOscuro;
+    }
   }
 }
