@@ -4,6 +4,9 @@ footer {
   background-color: $fondoOscuro;
   color: $letraFondoOscuro;
   margin-top: 5%;
+  .terminos{
+    list-style: none;
+  }
   
   @media (max-width: 768px) {
     text-align: center;
@@ -19,7 +22,7 @@ footer {
       margin: 0;
     }
   }
-
+  
   p, a {
     color: $letraFondoClaro;
   }

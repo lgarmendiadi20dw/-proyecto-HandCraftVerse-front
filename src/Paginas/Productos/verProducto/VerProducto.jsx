@@ -36,11 +36,11 @@ const VerProducto = ({ apiIp }) => {
   if (!producto) return <p>Cargando producto...</p>;
 
   const { multimedia } = producto;
-
+console.log(producto);
   return (
     <div className="container tw-mt-6">
-      <div className="row">
-        <div className="col-4 verProducto">
+      <div className="row verProducto">
+        <div className="col-6 col-lg-4">
           {multimedia.length > 1 ? (
             <Carousel
               prevIcon={<PrevIcon className="carruselIcon" />}
@@ -65,6 +65,14 @@ const VerProducto = ({ apiIp }) => {
               alt={multimedia[0].alt || "Imagen del producto"}
             />
           )}
+        </div>
+        <div className="col-6 col-lg-8">
+          <h2 className="textoTitulo">{producto.nombre}</h2>
+          <p>Vendido por: {producto.vendedorNombre
+          }</p>
+          <p className="precio">{producto.precio}€</p>
+          <p>{producto.stock} unidades disponibles</p>
+          <p>{producto.descripcion}</p>
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import Home from "./Paginas/Home";
 import VerCategoria from "./Paginas/Productos/Ver/VerCategoria";
 import Sidebar from "./components/sidebar/Sidebar";
 import VerProducto from "./Paginas/Productos/verProducto/VerProducto";
+import Footer from "./components/Footer/Footer";
 
 
 import { AuthContext } from "./Context";
@@ -17,12 +18,13 @@ import { AuthContext } from "./Context";
 const Perfil = lazy(() => import("./Paginas/usuario/Perfil"));
 
 const App = () => {
-  const apiIp = process.env.REACT_API_IP || "https://localhost:8443/";
+  const apiIp = process.env.REACT_API_IP || "https://172.30.100.138:8443/";
+  // const apiIp = process.env.REACT_API_IP || "https://localhost:8443/";
   const [darkMode, setDarkMode] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    fetch(`${apiIp || "https://localhost:8443/"}member/me3`, {
+    fetch(`${apiIp}member/me3`, {
       method: "GET",
       credentials: "include", // Incluye las cookies de sesión
       headers: {
@@ -66,6 +68,7 @@ const App = () => {
 
             <Route element={<Sidebar apiIp={apiIp} />} />
           </Routes>
+          <Footer/>
         </div>
       </AuthContext.Provider>
     </BrowserRouter>
