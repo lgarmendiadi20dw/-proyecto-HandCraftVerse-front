@@ -10,27 +10,24 @@ import { ReactComponent as Corazon } from "../../assets/svg/nav/corazon.svg";
 
 const Navbar = ({ apiIp }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
-    
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Estado para abrir/cerrar el dropdown
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const userData = useContext(AuthContext);
 
+    // Procesar roles
+    let roles = [];
+    if (userData && userData.roles) {
+        roles = userData.roles.replace(/[\[\]]/g, "").split(",").map(role => role.trim());
+    }
+
     const toggleTheme = () => {
-        const newTheme = !isDarkMode;
-        setIsDarkMode(newTheme);
-        if (newTheme) {
-            document.body.classList.add("dark");
-        } else {
-            document.body.classList.remove("dark");
-        }
+        setIsDarkMode(!isDarkMode);
+        document.body.classList.toggle("dark", isDarkMode);
     };
 
     const toggleDropdown = () => {
-        setIsDropdownOpen((prev) => !prev);
+        setIsDropdownOpen(!isDropdownOpen);
     };
-
-    const defaultImage = "/img/default-avatar.png"; // Imagen predeterminada
-    const userImage = userData?.imagen ? `/img/${userData.imagen}` : defaultImage;
 
     const cerrarSesion = () => {
         fetch(`${apiIp}member/logout`, {
@@ -49,27 +46,25 @@ const Navbar = ({ apiIp }) => {
             });
     };
 
+    const defaultImage = "/img/default-avatar.png";
+    const userImage = userData?.imagen ? `/img/${userData.imagen}` : defaultImage;
+
     return (
         <nav className="custom-navbar">
             <h1 className="custom-navbar-brand">
                 <Link to="/">HandCraftVerse</Link>
             </h1>
 
-            <h1 className="custom-navbar-brand">
-                <Link to="/crear-producto">Producto</Link>
-            </h1>
+            {roles.includes("VENDEDOR") && (
+                <h1 className="custom-navbar-brand">
+                    <Link to="/crear-producto">Producto</Link>
+                </h1>
+            )}
 
             <div className="search-contenedor">
-                <input
-                    type="text"
-                    placeholder="Buscar..."
-                    className="search-input"
-                />
+                <input type="text" placeholder="Buscar..." className="search-input" />
                 <button className="search-button">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
                     </svg>
                 </button>
@@ -85,29 +80,16 @@ const Navbar = ({ apiIp }) => {
                 {userData ? (
                     <div className="custom-dropdown">
                         <div id="perfilButton" onClick={toggleDropdown}>
-                            <img
-                                src={userImage}
-                                alt="Avatar"
-                                className="userIcon"
-                            />
+                            <img src={userImage} alt="Avatar" className="userIcon" />
                         </div>
-
                         {isDropdownOpen && (
                             <div className="custom-dropdown-content">
-                                <NavLink
-                                    to="/perfil"
-                                    className="custom-dropdown-element"
-                                >
+                                <NavLink to="/perfil" className="custom-dropdown-element">
                                     Perfil
                                 </NavLink>
-
-                                <Link
-                                    to="/configuracion"
-                                    className="custom-dropdown-element"
-                                >
+                                <Link to="/configuracion" className="custom-dropdown-element">
                                     Configuración
                                 </Link>
-
                                 <p
                                     className="custom-dropdown-element danger"
                                     onClick={cerrarSesion}
@@ -118,12 +100,8 @@ const Navbar = ({ apiIp }) => {
                         )}
                     </div>
                 ) : (
-                    <Link
-                        to="/iniciarSesion"
-                        
-                    >
-                            <UserIcon className="svg-icon" />
-                        
+                    <Link to="/iniciarSesion">
+                        <UserIcon className="svg-icon" />
                     </Link>
                 )}
             </div>

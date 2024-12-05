@@ -5,6 +5,8 @@ import Text from "../../components/inputs/Text";
 import TextArea from "../../components/inputs/TextArea";
 
 const CrearProducto = ({ apiIp }) => {
+  const userData = useContext(AuthContext);
+
   const [categorias, setCategorias] = useState([]);
   const [colores, setColores] = useState([]);
   const [selectedCategorias, setSelectedCategorias] = useState([]);

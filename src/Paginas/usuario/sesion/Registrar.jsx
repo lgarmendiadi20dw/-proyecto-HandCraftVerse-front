@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../../components/inputs/Button";
 import Text from "../../../components/inputs/Text";
 import "./Sesion.scss";
 import { Link } from "react-router-dom";
 
 const Registrar = ({ apiIp }) => {
+  const [isSeller, setIsSeller] = useState(false);
+
   function enviarFormulario(event) {
     event.preventDefault(); // Evitar comportamiento por defecto
     
@@ -16,8 +18,9 @@ const Registrar = ({ apiIp }) => {
         "passwordConfirm": document.login.passwordConfirm.value
     };
 
-    // Aquí puedes descomentar el fetch para hacer el envío de datos:
-    fetch(`${apiIp}member/registrar`, {
+    const url = isSeller ? `${apiIp}member/seller/registrar` : `${apiIp}member/registrar`;
+
+    fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -25,22 +28,18 @@ const Registrar = ({ apiIp }) => {
         },
         body: JSON.stringify(usuario),
         credentials: 'include'
-        
     })
-    
     .then(response => response.json())
     .then(data => {
-      // document.getElementById('mensaje').innerText = 'sesion iniciada exitosamente';
       window.location.href = "/";
     })
     .catch((error) => {
         document.getElementById('mensaje').innerText = 'Error al iniciar sesiocn';
         console.error('Error:', error);
     });
-    
-}
+  }
+
   return (
-    
     <div className="container tw-mt-6 tw-flex tw-justify-center tw-items-center min-h-screen">
       <div className="formulario">
         <h2>Iniciar Sesión</h2>
@@ -75,7 +74,16 @@ const Registrar = ({ apiIp }) => {
             name="passwordConfirm"
             required={true}
           />
-          
+          <div className="tw-mb-4">
+            <label htmlFor="sellerCheckbox">¿Quieres vender tus productos vendedor?</label><br/>
+            <input
+              type="checkbox"
+              id="sellerCheckbox"
+              checked={isSeller}
+              onChange={(e) => setIsSeller(e.target.checked)}
+            />
+            <label htmlFor="sellerCheckbox" className="tw-ml-2">Marca la casilla para registrarte como vendedor</label>
+          </div>
           <div id="mensaje" className="mt-3"></div>
 
           <div className="row">

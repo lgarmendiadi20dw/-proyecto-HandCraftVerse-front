@@ -36,7 +36,6 @@ const VerProducto = ({ apiIp }) => {
   if (!producto) return <p>Cargando producto...</p>;
 
   const { multimedia } = producto;
-console.log(producto);
   return (
     <div className="container tw-mt-6">
       <div className="row verProducto">
@@ -68,10 +67,10 @@ console.log(producto);
         </div>
         <div className="col-6 col-lg-8">
           <h2 className="textoTitulo">{producto.nombre}</h2>
-          <p>Vendido por: {producto.vendedorNombre
-          }</p>
+          <p>Vendido por: {producto.vendedorNombre}</p>
           <p className="precio">{producto.precio}€</p>
           <p>{producto.stock} unidades disponibles</p>
+          <p>{producto.stock > 0 ? "Disponible" : "Fuera de stock"}</p>
           <p>{producto.descripcion}</p>
         </div>
       </div>
