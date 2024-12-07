@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
+import { AuthContext } from "../../Context";
 import "./FormulariosProductos.scss";
 import Button from "../../components/inputs/Button";
 import Text from "../../components/inputs/Text";
@@ -46,15 +47,16 @@ const CrearProducto = ({ apiIp }) => {
   const enviarFormulario = async (event) => {
     event.preventDefault();
 
-    const { vendedorId, nombre, precio, stock, descripcion } = event.target;
+    const {  nombre, precio, stock, descripcion } = event.target;
 
-    if (!vendedorId.value || !nombre.value || !precio.value || !stock.value || !descripcion.value) {
+    if ( !nombre.value || !precio.value || !stock.value || !descripcion.value) {
       alert("Por favor, complete todos los campos.");
       return;
     }
+    console.log(userData.id)
 
     const producto = {
-      vendedorId: vendedorId.value,
+      vendedorId: userData.id,
       nombre: nombre.value,
       precio: parseFloat(precio.value),
       stock: parseInt(stock.value, 10),
@@ -98,7 +100,7 @@ const CrearProducto = ({ apiIp }) => {
         </div>
         <input type="file" id="file" />
       </label>
-          <Text type="text" text="Vendedor ID" name="vendedorId" required={true} />
+          {/* <Text type="text" text="Vendedor ID" name="vendedorId" required={true} /> */}
           <Text type="text" text="Nombre del producto" name="nombre" required={true} />
           <Text type="number" text="Precio" name="precio" step="0.01" required={true} />
           <Text type="number" text="Stock" name="stock" required={true} />

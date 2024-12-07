@@ -15,11 +15,11 @@ import Footer from "./components/Footer/Footer";
 
 import { AuthContext } from "./Context";
 
-const Perfil = lazy(() => import("./Paginas/usuario/Perfil"));
+const Perfil = lazy(() => import("./Paginas/usuario/perfil/Perfil"));
 
 const App = () => {
-  // const apiIp = process.env.REACT_API_IP || "https://172.30.100.138:8443/";
-  const apiIp = process.env.REACT_API_IP || "https://localhost:8443/";
+  const apiIp = process.env.REACT_API_IP || "https://172.30.100.138:8443/";
+  // const apiIp = process.env.REACT_API_IP || "https://localhost:8443/";
   const [darkMode, setDarkMode] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -60,7 +60,7 @@ const App = () => {
 
             <Route path="/iniciarSesion" element={<Login apiIp={apiIp} />} />
             <Route path="/registrarse" element={<Registrar apiIp={apiIp} />} />
-            <Route path="/perfil" element={
+            <Route path="/perfil/:id" element={
               <Suspense fallback={<div>Cargando...</div>}>
                 {currentUser ? <Perfil apiIp={apiIp} /> : <div>Cargando datos del usuario...</div>}
               </Suspense>
