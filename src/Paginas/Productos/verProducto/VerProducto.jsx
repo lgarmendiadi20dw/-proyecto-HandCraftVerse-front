@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProductoImagen from "./ProductoImagen";
 
 import { ReactComponent as PrevIcon } from "../../../assets/svg/iconCarrusel/prev-icon.svg";
@@ -36,7 +36,7 @@ const VerProducto = ({ apiIp }) => {
   }, [id, cargarProducto]);
 
   if (!producto) return <p>Cargando producto...</p>;
-
+console.log(producto);
   const { multimedia } = producto;
   return (
     <div className="container tw-mt-6">
@@ -71,7 +71,7 @@ const VerProducto = ({ apiIp }) => {
       {/* Columna del título y detalles */}
       <div className="col-12 col-md-6 col-lg-8">
         <h2 className="textoTitulo">{producto.nombre}</h2>
-        <p>Vendido por: {producto.vendedorNombre}</p>
+        <p>Vendido por:<Link to={`/perfil/${producto.vendedorId}`}> {producto.vendedorNombre}</Link></p>
         <p className="precio">{producto.precio}€</p>
         {producto.stock > 0 ? (
           <p id="disponible">
