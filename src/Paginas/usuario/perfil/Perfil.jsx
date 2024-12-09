@@ -6,6 +6,8 @@ import Mostrar from "./Mostrar";
 import Editar from "./Editar";
 import GridProductos from "../../../components/gridProductos/GridProductos";
 import Button from "../../../components/inputs/Button";
+import {ReactComponent as Edit } from "../../../assets/svg/iconos/editar.svg";
+
 
 const Perfil = ({ apiIp }) => {
   const { id } = useParams();
@@ -21,14 +23,14 @@ const Perfil = ({ apiIp }) => {
 
   // Cargar los datos del usuario cuando el id cambie o cuando el componente se monte
   useEffect(() => {
-    if (!userData) return; // Esperar hasta que userData esté disponible
+    // if (!userData) return; // Esperar hasta que userData esté disponible
 
-    if (userData && userData.id === id) {
+    if (userData && Number(userData.id) === Number(id)) {
       setUser(userData);
-    } else if (id) {
+    } else {
+      console.log("userData =null");
       fetch(`${apiIp}member/${id}`, {
-        method: "GET",
-        credentials: "include",
+        method: "GET"
       })
         .then((response) => {
           if (!response.ok) {
@@ -46,6 +48,9 @@ const Perfil = ({ apiIp }) => {
     }
   }, [id, userData, apiIp]);
 
+  
+    
+  
   const cargarProductos = useCallback(() => {
     if (user && user.id) {
       fetch(`${apiIp}member/seller/${user.id}/productos`, {
@@ -69,6 +74,7 @@ const Perfil = ({ apiIp }) => {
     }
   }, [user, cargarProductos]);
 
+  // console.log("user", user);
   if (!user) {
     return <div>Cargando perfil...</div>; // Indicador mientras se carga el perfil
   }
@@ -81,14 +87,12 @@ const Perfil = ({ apiIp }) => {
     <div className="col-10">
           {editMode ? (
             <Editar 
-            className="col-10"
               apiIp={apiIp}
               user={user} // Pasamos el usuario al componente Editar
               setUser={setUser}  // Pasamos la función para actualizar el usuario una vez editado
             />
           ) : (
             <Mostrar 
-            className="col-10"
               img={user.imagen}
               username={user.username}
               email={user.email}
@@ -99,26 +103,36 @@ const Perfil = ({ apiIp }) => {
           )}
           </div>
           <div className="col-2">
-          {userData && userData.id == id && (
-            <Button 
-              onClick={() => setEditMode(!editMode)} // Alterna el valor de editMode
-              text={editMode ? "Cancelar" : "Editar"} // Muestra el texto adecuado
-            />
-          )}
+          {userData && Number(userData.id) === Number(id) && (
+  <Button 
+  onClick={() => setEditMode(!editMode)} // Alterna el valor de editMode
+  className={editMode ? "danger" : ""} // Aplica la clase 'danger' si editMode es true
+  text={
+    editMode ? 
+    "Cancelar" : 
+    <>
+      <span>Editar</span> 
+      <Edit className="profileIcon" />
+    </>
+  } 
+/>
+
+)}
+
           </div>
-        </div>
+        
         
        {/* Mostrar productos si el usuario tiene el rol de vendedor */}
 {editMode ? (
-  <div /> // Si estamos en modo edición, no mostramos nada
+  <div /> //stamos en modo edición, no mostramos nada
 ) : (
   roles.includes("VENDEDOR") && productos.length > 0 && (
-    <div className="row mt-3">
+    <div className="col-12 tw-mt-10">
       <GridProductos productos={productos} apiIp={apiIp} />
     </div>
   )
 )}
-
+</div>
       </div>
     </div>
   );

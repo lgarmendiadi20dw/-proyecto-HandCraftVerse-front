@@ -1,8 +1,8 @@
 @import "../../../styles/_variables.scss";
 
 .userImagePerfil{
-    max-width: 15em;
-    max-height: 15em;
+    width: 16em;
+    height: 15em;
     border-radius: 50%;
 }
 .profileIcon{
@@ -10,75 +10,10 @@
       height: 1.5rem;
      
         stroke: $colorTexto;
-        stroke-width: 0.5em;
+        stroke-width: 0.6em;
         fill: $colorTexto;
-
+.dark &{
+  stroke: $colorTextoDark;
+        fill: $colorTextoDark;
 }
-.formPerfil{
-  width: 80rem;
-
-}
-.perfil-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.perfil-info {
-  margin-top: 20px;
-}
-
-.profile-details, .edit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-input[type="text"], input[type="email"] {
-  padding: 8px;
-  font-size: 16px;
-  margin-top: 5px;
-}
-
-button {
-  padding: 10px;
-  font-size: 16px;
-  margin-top: 10px;
-  cursor: pointer;
-  border: none;
-}
-
-.save-button {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.cancel-button {
-  background-color: #f44336;
-  color: white;
-}
-
-.edit-button {
-  background-color: #008CBA;
-  color: white;
-}
-
-.error-message, .success-message {
-  padding: 10px;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.error-message {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-.success-message {
-  background-color: #d4edda;
-  color: #155724;
 }

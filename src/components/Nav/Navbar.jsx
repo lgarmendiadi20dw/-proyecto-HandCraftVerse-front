@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import { AuthContext } from "../../Context";
+import Cookies from 'js-cookie'; // Import the js-cookie library
 
 import { ReactComponent as UserIcon } from "../../assets/svg/nav/user.svg";
 import { ReactComponent as Luna } from "../../assets/svg/nav/luna.svg";
@@ -9,7 +10,7 @@ import { ReactComponent as Sol } from "../../assets/svg/nav/sol.svg";
 import { ReactComponent as Corazon } from "../../assets/svg/nav/corazon.svg";
 
 const Navbar = ({ apiIp }) => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(Cookies.get('isDarkMode') === 'true'); // Initialize state from cookie
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");  // Estado para el término de búsqueda
     const [searchResults, setSearchResults] = useState([]); // Estado para los resultados de búsqueda
@@ -26,6 +27,7 @@ const Navbar = ({ apiIp }) => {
     const toggleTheme = () => {
         setIsDarkMode((prevMode) => {
             const newMode = !prevMode;
+            Cookies.set('isDarkMode', newMode, { expires: 7 }); // Set cookie expiration to 7 days
             document.body.classList.toggle("dark", newMode);
             return newMode;
         });
@@ -94,6 +96,23 @@ const Navbar = ({ apiIp }) => {
         }
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                isDropdownOpen &&
+                !event.target.closest('#perfilButton') &&
+                !event.target.closest('.custom-dropdown-content')
+            ) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isDropdownOpen]);
+
     return (
         <nav className="custom-navbar">
             <h1 className="custom-navbar-brand">
@@ -102,7 +121,7 @@ const Navbar = ({ apiIp }) => {
 
             {roles.includes("VENDEDOR") && (
                 <h1 className="custom-navbar-brand">
-                    <Link to="/crear-producto">Producto</Link>
+                    <Link to="/crear-producto">+ Vender</Link>
                 </h1>
             )}
 
@@ -148,7 +167,7 @@ const Navbar = ({ apiIp }) => {
                             <img src={userImage} alt="Avatar" className="userIcon" />
                         </div>
                         {isDropdownOpen && (
-                            <div className="custom-dropdown-content">
+                            <div className={`custom-dropdown-content ${isDropdownOpen ? 'opened' : ''}`}>
                                 <Link to={`/perfil/${userData.id}`} className="custom-dropdown-element">
                                     Perfil
                                 </Link>

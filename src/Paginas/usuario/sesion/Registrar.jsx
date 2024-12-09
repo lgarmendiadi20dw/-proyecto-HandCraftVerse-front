@@ -42,7 +42,7 @@ const Registrar = ({ apiIp }) => {
   return (
     <div className="container tw-mt-6 tw-flex tw-justify-center tw-items-center min-h-screen">
       <div className="formulario">
-        <h2>Iniciar Sesión</h2>
+        <h2>Registrarse</h2>
         <form onSubmit={enviarFormulario} className="formSesion" name="login">
           <Text
             type="text"
@@ -74,15 +74,16 @@ const Registrar = ({ apiIp }) => {
             name="passwordConfirm"
             required={true}
           />
-          <div className="tw-mb-4">
-            <label htmlFor="sellerCheckbox">¿Quieres vender tus productos vendedor?</label><br/>
-            <input
-              type="checkbox"
-              id="sellerCheckbox"
-              checked={isSeller}
-              onChange={(e) => setIsSeller(e.target.checked)}
-            />
-            <label htmlFor="sellerCheckbox" className="tw-ml-2">Marca la casilla para registrarte como vendedor</label>
+          <div className="tw-mt-4">
+           
+            <div className="checkbox-wrapper-46">
+            <label htmlFor="sellerCheckbox">¿Quieres vender tus productos?</label><br/>
+        <input type="checkbox" id="cbx-46" className="inp-cbx" onChange={(e) => setIsSeller(e.target.checked)}/>
+        <label htmlFor="cbx-46" className="cbx"><span>
+            <svg viewBox="0 0 12 10" height="10px" width="12px">
+              <polyline points="1.5 6 4.5 9 10.5 1" /></svg></span><span>Marca la casilla para registrarte como vendedor</span>
+        </label>
+      </div>
           </div>
           <div id="mensaje" className="mt-3"></div>
 

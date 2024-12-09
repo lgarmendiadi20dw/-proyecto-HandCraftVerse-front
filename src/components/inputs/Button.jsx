@@ -1,13 +1,13 @@
 import React from "react";
 import "./Input.scss";
 
-const Button = ({ type, text, onClick, id }) => {
+const Button = ({ type, text, onClick, id, className = "" }) => {
   return (
     <button 
-      className="boton" 
+      className={`${className} boton `} // Combina las clases
       id={id} 
       type={type} 
-      onClick={onClick} // Agrega el manejo del click aquí
+      onClick={onClick}
     >
       <span>{text}</span>
     </button>

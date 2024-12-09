@@ -9,24 +9,26 @@
   padding-right: 5%;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem; // Espaciado uniforme entre ícono y texto
   border-radius: 2rem;
   letter-spacing: 1px;
   transition: all 0.2s linear;
   cursor: pointer;
   border: none;
   background: $fondoOscuro;
-body.dark & {
-    background: $letraFondoDarkClaro;
-    &:hover{
-    
-      background: $letraFondoDarkOscuro;
-    }
+  color: $colorTexto;
+
+  & > svg,
+  & > span { // Asegura que texto e ícono compartan estilos similares
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
   & > svg {
-    margin-right: 5px;
-    margin-left: 5px;
     font-size: 20px;
     transition: all 0.4s ease-in;
+    
   }
 
   &:hover > svg {
@@ -35,10 +37,11 @@ body.dark & {
   }
 
   &:hover {
-   background-color: $fondoOscuro;
+    background-color: $fondoOscuro;
     transform: translateY(-2px);
   }
 }
+
 
 .group {
   position: relative;
@@ -152,7 +155,7 @@ body.dark & {
     .svg-icon {
       width: 24px;
       height: 24px;
-      fill: #999; // Cambia el color aquí
+      fill: $colorTextoSecundario; // Cambia el color aquí
       transition: fill 0.3s ease;
   
       &:hover {
@@ -168,6 +171,93 @@ body.dark & {
     to {
       width: 0;
       background: transparent;
+    }
+  }
+}
+
+
+// DarkMode
+
+.dark {
+  .boton {
+    background: $fondoDarkClaro;
+    color: $colorTextoDark;
+    border: $bordeDarkClaro;
+
+    &:hover {
+      background-color: $fondoDarkOscuro;
+      color: $letraFondoDarkClaro;
+      .profileIcon {
+         
+            stroke: $colorTextoDark;
+                  fill: $colorTextoDark;
+          
+        }
+    }
+
+    & > svg {
+      color: $letraFondoDarkClaro;
+
+      &:hover {
+        color: $letraFondoDarkOscuro;
+        
+      }
+    }
+  }
+
+  .group {
+    .input {
+      border-bottom: 1px solid $fondoDarkClaro;
+      color: $colorTextoDark;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:not(:placeholder-shown) ~ label,
+      &:focus ~ label {
+        color: $letraFondoDarkOscuro;
+
+        .obligatorio {
+          color: $dangerDark;
+        }
+      }
+
+      &:focus ~ .bar:before,
+      &:focus ~ .bar:after {
+        background: $letraFondoDarkClaro;
+      }
+
+      
+    }
+
+    label {
+      color: $colorTextoSecundarioDark;
+
+      .obligatorio & {
+        color: $dangerDark;
+      }
+    }
+
+    .bar {
+      &:before,
+      &:after {
+        background: $letraFondoDarkClaro;
+      }
+    }
+
+    .highlight {
+      background: $letraFondoDarkOscuro;
+    }
+
+    .password-toggle {
+      .svg-icon {
+        fill: $colorTextoSecundarioDark;
+
+        &:hover {
+          fill: $letraFondoDarkOscuro;
+        }
+      }
     }
   }
 }

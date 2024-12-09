@@ -45,7 +45,7 @@
     color: $letraFondoClaro;
 
     &::placeholder {
-      color: $letraFondoClaro;
+      color: $colorTextoSecundario;
     }
   }
 
@@ -61,7 +61,7 @@
     svg {
       width: 20px;
       stroke: none;
-      fill: $letraFondoClaro;
+      fill: $colorTextoSecundario;
       stroke-linecap: round;
       stroke-linejoin: round;
       cursor: pointer;
@@ -127,9 +127,9 @@
       }
 
       // Mostrar el menú al hacer hover
-      &:hover .custom-dropdown-content {
+       .opened{
         display: block;
-        // animation: slideInLeft 0.3s ease-out;
+         animation: slideInLeft 0.3s ease-out;
       }
     }
 
@@ -155,13 +155,13 @@
 }
 
 
-body.dark {
+.dark {
   .custom-navbar{
   background-color: $fondoDarkOscuro;
   .custom-navbar-brand {
-    color: $letraFondoDarkOscuro;
+    color: $letraFondoDarkClaro;
     &:hover{
-      color:$colorTitulosDark;
+      color:$letraFondoDarkOscuro;
     }
   }
   .search-contenedor {
@@ -171,14 +171,14 @@ body.dark {
     }
   }
   .search-input{
-    color: $letraFondoDarkClaro;
+    color: $colorTextoDark;
     &::placeholder {
-      color: $letraFondoDarkClaro;
+      color: $colorTextoSecundarioDark;
     }
   }
   .search-button {
     svg {
-      fill: $letraFondoDarkClaro;
+      fill: $colorTextoSecundarioDark;
       &:hover {
         fill: $colorTitulosDark;
       }
@@ -188,8 +188,8 @@ body.dark {
     .svg-icon {
       stroke: $letraFondoDarkClaro;
       &:hover {
-        fill: $colorTitulosDark;
-        stroke: $colorTitulosDark;
+        fill: $letraFondoDarkOscuro;
+        stroke: $letraFondoDarkOscuro;
       }
     }
     .custom-dropdown-content {
@@ -208,13 +208,7 @@ body.dark {
         }
       }
     }
-    .svg-icon {
-      stroke: $letraFondoDarkClaro;
-      &:hover {
-        fill: $colorTitulosDark;
-        stroke: $colorTitulosDark;
-      }
-    }
+    
   }
 }
 }
