@@ -36,7 +36,6 @@ const VerProducto = ({ apiIp }) => {
   }, [id, cargarProducto]);
 
   if (!producto) return <p>Cargando producto...</p>;
-console.log(producto);
   const { multimedia } = producto;
   return (
     <div className="container tw-mt-6">

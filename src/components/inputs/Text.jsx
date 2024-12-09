@@ -3,7 +3,7 @@ import { ReactComponent as OjoIcon } from "../../assets/svg/iconos/ojo.svg";
 import { ReactComponent as OjosCruzadosIcon } from "../../assets/svg/iconos/ojos-cruzados.svg";
 import "./Input.scss";
 
-const Text = ({ type, text, name, step, required }) => {
+const Text = ({ type, text, name, step, required  , value}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -21,6 +21,7 @@ const Text = ({ type, text, name, step, required }) => {
         className="input"
         required={required}
         placeholder=""
+        value={value}
         />
         <span className="bar" />
         <label htmlFor={name}>

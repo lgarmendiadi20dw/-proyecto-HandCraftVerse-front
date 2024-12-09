@@ -3,9 +3,11 @@
 footer {
   background-color: $fondoOscuro;
   color: $letraFondoOscuro;
-  margin-top: 5%;
   position: relative; /* Asegúrate de que el footer tenga una posición */
   z-index: 10; 
+  .container {
+    padding:0;
+  }
 
   .terminos{
     list-style: none;

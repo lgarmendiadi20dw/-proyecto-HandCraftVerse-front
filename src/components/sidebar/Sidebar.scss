@@ -2,7 +2,7 @@
 .sidebar {
     position: absolute; /* Cambia de fixed a absolute */
     left: 0;
-    height: 100%; /* Resta la altura del navbar */
+    height: 100%;
     width: 200px; /* Ancho del sidebar */
     background-color: $fondoClaro; /* Color de fondo */
     padding: 20px;

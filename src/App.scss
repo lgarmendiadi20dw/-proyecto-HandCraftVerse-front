@@ -1,8 +1,12 @@
 @import "./styles/variables";
 
+html{
+  height: 100%;
+}
+
 body {
   margin: 0;
-
+  height: 100%;
   font-family: $fuenteLetra;
   font-size: 16px;
   line-height: 1.6;
@@ -21,6 +25,9 @@ body {
 
 .container{
   padding-top: 3%;
+  padding-bottom: 5%;
+
+
 
 }
 .descripcion{
@@ -37,11 +44,15 @@ h6 {
   margin-bottom: 0.3em;
 }
 .containerSidebar {
-  margin: 0;
+  position: relative; /* Contenedor padre para el Sidebar */
+  height: 100%;
+
 }
 
 .conNavLateral {
   margin-left: 225px;
+  padding-bottom: 5%;
+
 }
 
 .textoTitulo {

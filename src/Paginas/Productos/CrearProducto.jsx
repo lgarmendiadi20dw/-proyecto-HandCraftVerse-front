@@ -53,8 +53,6 @@ const CrearProducto = ({ apiIp }) => {
       alert("Por favor, complete todos los campos.");
       return;
     }
-    console.log(userData.id)
-
     const producto = {
       vendedorId: userData.id,
       nombre: nombre.value,

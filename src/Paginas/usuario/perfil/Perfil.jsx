@@ -3,40 +3,49 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../../Context";
 import "./Perfil.scss";
 import Mostrar from "./Mostrar";
+import Editar from "./Editar";
 import GridProductos from "../../../components/gridProductos/GridProductos";
+import Button from "../../../components/inputs/Button";
 
 const Perfil = ({ apiIp }) => {
   const { id } = useParams();
-  const userData = useContext(AuthContext);
+  const userData = useContext(AuthContext); // userData de contexto
   const [productos, setProductos] = useState([]);
   const [user, setUser] = useState(null);
+  const [editMode, setEditMode] = useState(false); // Estado para controlar el modo de edición
 
   let roles = [];
-if (user && user.roles) {
-    // Limpiamos los corchetes y las comillas, luego dividimos por comas
+  if (user && user.roles) {
     roles = user.roles.replace(/[\[\]"]+/g, "").split(",").map(role => role.trim());
-}
-
-
+  }
 
   // Cargar los datos del usuario cuando el id cambie o cuando el componente se monte
   useEffect(() => {
-    if (userData.id === id) {
-      setUser(userData); // Usamos userData si el id es el mismo
-    } else {
+    if (!userData) return; // Esperar hasta que userData esté disponible
+
+    if (userData && userData.id === id) {
+      setUser(userData);
+    } else if (id) {
       fetch(`${apiIp}member/${id}`, {
         method: "GET",
         credentials: "include",
       })
-        .then((response) => response.json())
-        .then((data) => {
-          setUser(data); // Seteamos el usuario desde la API
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al cargar el usuario");
+          }
+          return response.json();
         })
-        .catch((error) => console.error("Error al cargar el usuario:", error));
+        .then((data) => {
+          setUser(data);
+        })
+        .catch((error) => {
+          console.error("Error al cargar el usuario:", error);
+          setUser(null);
+        });
     }
-  }, [id, userData, apiIp]); // Solo se ejecuta si `id` o `userData` cambian
+  }, [id, userData, apiIp]);
 
-  console.log(user);
   const cargarProductos = useCallback(() => {
     if (user && user.id) {
       fetch(`${apiIp}member/seller/${user.id}/productos`, {
@@ -53,34 +62,63 @@ if (user && user.roles) {
     }
   }, [apiIp, user]);
 
+  // Ejecutamos la carga de productos solo si se ha encontrado un usuario válido
   useEffect(() => {
-    cargarProductos();
-  }, [userData.id, cargarProductos]);
+    if (user) {
+      cargarProductos();
+    }
+  }, [user, cargarProductos]);
 
   if (!user) {
-    // Opcional: Mostrar un cargando o un estado cuando no se ha cargado el usuario
-    return <div>Cargando...</div>;
+    return <div>Cargando perfil...</div>; // Indicador mientras se carga el perfil
   }
 
   return (
-    <div className="container tw-mt-6 tw-flex tw-justify-center tw-items-center">
+    <div className="container tw-flex tw-justify-center tw-items-center">
       <div className="formulario col-12">
         <div className="row">
-          <Mostrar 
-            img={user.imagen}
-            username={user.username}
-            email={user.email}
-            direccion={user.direccion}
-            telefono={user.telefono}
-            descripcion={user.descripcion}
-          />
+          
+    <div className="col-10">
+          {editMode ? (
+            <Editar 
+            className="col-10"
+              apiIp={apiIp}
+              user={user} // Pasamos el usuario al componente Editar
+              setUser={setUser}  // Pasamos la función para actualizar el usuario una vez editado
+            />
+          ) : (
+            <Mostrar 
+            className="col-10"
+              img={user.imagen}
+              username={user.username}
+              email={user.email}
+              direccion={user.direccion}
+              telefono={user.telefono}
+              descripcion={user.descripcion}
+            />
+          )}
+          </div>
+          <div className="col-2">
+          {userData && userData.id == id && (
+            <Button 
+              onClick={() => setEditMode(!editMode)} // Alterna el valor de editMode
+              text={editMode ? "Cancelar" : "Editar"} // Muestra el texto adecuado
+            />
+          )}
+          </div>
         </div>
-        {roles.includes("VENDEDOR") && (
-                <div className="row mt-3">
-                {productos.length > 0 && <GridProductos productos={productos} apiIp={apiIp} />}
-              </div>
-            )}
         
+       {/* Mostrar productos si el usuario tiene el rol de vendedor */}
+{editMode ? (
+  <div /> // Si estamos en modo edición, no mostramos nada
+) : (
+  roles.includes("VENDEDOR") && productos.length > 0 && (
+    <div className="row mt-3">
+      <GridProductos productos={productos} apiIp={apiIp} />
+    </div>
+  )
+)}
+
       </div>
     </div>
   );

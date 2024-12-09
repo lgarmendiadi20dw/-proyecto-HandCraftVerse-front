@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Input.scss";
 
-const TextArea = ({ text, name, required  }) => {
+const TextArea = ({ text, name, required  , value}) => {
   const [height, setHeight] = useState("45px");
   const textAreaRef = useRef(null);
 
@@ -22,6 +22,7 @@ const TextArea = ({ text, name, required  }) => {
         placeholder=""
         name={name}
         id={name}
+        value={value}
         className="input textarea"
         style={{ height }}
         onInput={handleInput}
