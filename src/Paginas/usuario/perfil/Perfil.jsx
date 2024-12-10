@@ -93,12 +93,7 @@ const Perfil = ({ apiIp }) => {
             />
           ) : (
             <Mostrar 
-              img={user.imagen}
-              username={user.username}
-              email={user.email}
-              direccion={user.direccion}
-              telefono={user.telefono}
-              descripcion={user.descripcion}
+              user={user}
             />
           )}
           </div>

@@ -22,7 +22,12 @@
               }
           }
     }
-    
+    .botonesCompraFav{
+      &>*{
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
+    }
     
     .carousel-indicators {
         [data-bs-target] {

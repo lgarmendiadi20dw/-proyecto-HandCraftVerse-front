@@ -1,0 +1,73 @@
+.numeric-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 120px;
+    background-color: #f9f9f9;
+  
+    &__button {
+      width: 35px;
+      height: 35px;
+      border: none;
+      background-color: #e0e0e0;
+      color: #333;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:disabled {
+        background-color: #f0f0f0;
+        color: #aaa;
+      }
+  
+      &:hover:not(:disabled) {
+        background-color: #d6d6d6;
+      }
+  
+      &.decrement {
+        border-right: 1px solid #ccc;
+        border-radius: 8px 0 0 8px;
+      }
+  
+      &.increment {
+        border-left: 1px solid #ccc;
+        border-radius: 0 8px 8px 0;
+      }
+    }
+  
+    &__field {
+      width: 50px;
+      text-align: center;
+      border: none;
+      background-color: transparent;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+  
+      // Oculta las flechas del input de número en todos los navegadores
+      -moz-appearance: textfield; // Firefox
+      -webkit-appearance: none;   // Chrome y Safari
+      appearance: textfield;      // Propiedad estándar
+  
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none; // Chrome y Safari
+        margin: 0;
+      }
+  
+      &:disabled {
+        color: #aaa;
+      }
+  
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  

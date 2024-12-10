@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import ProductoImagen from "./ProductoImagen";
+import NumericInput from "../../../components/inputs/NumericInput";
+import Button from "../../../components/inputs/Button";
 
 import { ReactComponent as PrevIcon } from "../../../assets/svg/iconCarrusel/prev-icon.svg";
 import { ReactComponent as NextIcon } from "../../../assets/svg/iconCarrusel/next-icon.svg";
@@ -39,59 +41,75 @@ const VerProducto = ({ apiIp }) => {
   const { multimedia } = producto;
   return (
     <div className="container tw-mt-6">
-    <div className="row verProducto">
-      {/* Columna de imágenes */}
-      <div className="col-12 col-md-6 col-lg-4">
-        {multimedia.length > 1 ? (
-          <Carousel
-            prevIcon={<PrevIcon className="carruselIcon" />}
-            nextIcon={<NextIcon className="carruselIcon" />}
-            activeIndex={index}
-            onSelect={handleSelect}
-            interval={null} // Desactiva el cambio automático
-          >
-            {multimedia.map((item, idx) => (
-              <Carousel.Item key={idx}>
-                <ProductoImagen
-                  src={`/img/${item.nombreArchivo}`}
-                  alt={item.alt || `Imagen ${idx + 1}`}
-                />
-              </Carousel.Item>
-            ))}
-          </Carousel>
-        ) : (
-          <ProductoImagen
-            src={`/img/${multimedia[0].nombreArchivo}`}
-            alt={multimedia[0].alt || "Imagen del producto"}
-          />
-        )}
-      </div>
-  
-      {/* Columna del título y detalles */}
-      <div className="col-12 col-md-6 col-lg-8">
-        <h2 className="textoTitulo">{producto.nombre}</h2>
-        <p>Vendido por:<Link to={`/perfil/${producto.vendedorId}`}> {producto.vendedorNombre}</Link></p>
-        <p className="precio">{producto.precio}€</p>
-        {producto.stock > 0 ? (
-          <p id="disponible">
-            <Disponible className="iconoDisponibilidad" />
-            Disponible
+      <div className="row verProducto">
+        {/* Columna de imágenes */}
+        <div className="col-12 col-md-6 col-lg-4">
+          <div className="row">
+            {multimedia.length > 1 ? (
+              <Carousel
+                prevIcon={<PrevIcon className="carruselIcon" />}
+                nextIcon={<NextIcon className="carruselIcon" />}
+                activeIndex={index}
+                onSelect={handleSelect}
+                interval={null} // Desactiva el cambio automático
+              >
+                {multimedia.map((item, idx) => (
+                  <Carousel.Item key={idx}>
+                    <ProductoImagen
+                      src={`/img/${item.nombreArchivo}`}
+                      alt={item.alt || `Imagen ${idx + 1}`}
+                    />
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            ) : (
+              <ProductoImagen
+                src={`/img/${multimedia[0].nombreArchivo}`}
+                alt={multimedia[0].alt || "Imagen del producto"}
+              />
+            )}
+          </div>
+          <div className="row botonesCompraFav">
+            <div className="col-12"></div>
+            <div className="col-12 col-md-6 d-flex justify-content-center align-items-center">
+  <NumericInput stock={producto.stock} />
+</div>
+
+            <div className="col-12 col-md-6">
+              <Button text="Añadir al carrito" />
+            </div>
+          </div>
+        </div>
+
+        {/* Columna del título y detalles */}
+        <div className="col-12 col-md-6 col-lg-8">
+          <h2 className="textoTitulo">{producto.nombre}</h2>
+          <p>
+            Vendido por:
+            <Link to={`/perfil/${producto.vendedorId}`}>
+              {" "}
+              {producto.vendedorNombre}
+            </Link>
           </p>
-        ) : (
-          <p id="sinStock">
-            <SinStock className="iconoDisponibilidad" />
-            Fuera de stock
-          </p>
-        )}
-        {/* Descripción (alinea debajo del texto de disponibilidad en pantallas grandes) */}
-        <div className="col-12 mt-3">
-          <p className="descripcion">{producto.descripcion}</p>
+          <p className="precio">{producto.precio}€</p>
+          {producto.stock > 0 ? (
+            <p id="disponible">
+              <Disponible className="iconoDisponibilidad" />
+              Disponible
+            </p>
+          ) : (
+            <p id="sinStock">
+              <SinStock className="iconoDisponibilidad" />
+              Fuera de stock
+            </p>
+          )}
+          {/* Descripción (alinea debajo del texto de disponibilidad en pantallas grandes) */}
+          <div className="col-12 mt-3">
+            <p className="descripcion">{producto.descripcion}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
-
   );
 };
 
