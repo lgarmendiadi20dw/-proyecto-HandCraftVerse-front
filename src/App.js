@@ -18,8 +18,8 @@ import { AuthContext } from "./Context";
 const Perfil = lazy(() => import("./Paginas/usuario/perfil/Perfil"));
 
 const App = () => {
-  // const apiIp = "https://172.30.100.138:8443/";
-  const apiIp = process.env.REACT_API_IP || "https://localhost:8443/";
+  const apiIp = "https://172.30.100.138:8443/";
+  // const apiIp = process.env.REACT_API_IP || "https://localhost:8443/";
   const [darkMode, setDarkMode] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
