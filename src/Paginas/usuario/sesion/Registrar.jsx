@@ -34,7 +34,7 @@ const Registrar = ({ apiIp }) => {
       window.location.href = "/";
     })
     .catch((error) => {
-        document.getElementById('mensaje').innerText = 'Error al iniciar sesiocn';
+        document.getElementById('mensaje').innerText = 'Error al iniciar sesion';
         console.error('Error:', error);
     });
   }
