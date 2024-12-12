@@ -5,6 +5,7 @@ import "./Perfil.scss";
 import Mostrar from "./Mostrar";
 import Editar from "./Editar";
 import GridProductos from "../../../components/gridProductos/GridProductos";
+import Cargar from "../../../components/Cargar/Cargar";
 import Button from "../../../components/inputs/Button";
 import {ReactComponent as Edit } from "../../../assets/svg/iconos/editar.svg";
 
@@ -76,7 +77,7 @@ const Perfil = ({ apiIp }) => {
 
   // console.log("user", user);
   if (!user) {
-    return <div>Cargando perfil...</div>; // Indicador mientras se carga el perfil
+    return <Cargar/>; // Indicador mientras se carga el perfil
   }
 
   return (

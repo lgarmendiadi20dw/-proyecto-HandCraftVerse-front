@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "../Card/Card";
 import "./GridProductos.scss";
+import Cargar from "../Cargar/Cargar";
 
 const GridProductos = ({ productos, apiIp }) => {
   return (
@@ -10,7 +11,7 @@ const GridProductos = ({ productos, apiIp }) => {
           <Card key={producto.id} producto={producto} apiIp={apiIp} />
         ))
       ) : (
-        <p>Cargando productos...</p>
+        <Cargar/>
       )}
     </div>
   );

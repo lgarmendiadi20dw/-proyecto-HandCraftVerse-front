@@ -7,7 +7,7 @@ html{
 body {
   margin: 0;
   height: 100%;
-  font-family: $fuenteLetra;
+  // font-family: $fuenteLetra;
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: 0.5px;
@@ -59,7 +59,7 @@ h6 {
 .textoTitulo {
   position: relative;
   color: $colorTitulos;
-  font-family: $titulos;
+  // font-family: $titulos;
   letter-spacing: 1px;
   font-size: 25px;
   .dark & {

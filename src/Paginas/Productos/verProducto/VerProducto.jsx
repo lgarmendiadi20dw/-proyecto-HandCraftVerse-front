@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import ProductoImagen from "./ProductoImagen";
 import NumericInput from "../../../components/inputs/NumericInput";
 import Button from "../../../components/inputs/Button";
+import Cargar from "../../../components/Cargar/Cargar";
 
 import { ReactComponent as PrevIcon } from "../../../assets/svg/iconCarrusel/prev-icon.svg";
 import { ReactComponent as NextIcon } from "../../../assets/svg/iconCarrusel/next-icon.svg";
@@ -37,7 +38,7 @@ const VerProducto = ({ apiIp }) => {
     cargarProducto();
   }, [id, cargarProducto]);
 
-  if (!producto) return <p>Cargando producto...</p>;
+  if (!producto) return <Cargar/>;
   const { multimedia } = producto;
   return (
     <div className="container tw-mt-6">
