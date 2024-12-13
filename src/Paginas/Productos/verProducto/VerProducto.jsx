@@ -1,24 +1,25 @@
-import React, { useEffect, useState, useContext, useCallback } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useContext, useState, useEffect, useCallback } from "react";
+import { useParams, Link } from "react-router-dom";
+import { AuthContext } from "../../../Context";
 import ProductoImagen from "./ProductoImagen";
 import NumericInput from "../../../components/inputs/NumericInput";
 import Button from "../../../components/inputs/Button";
 import Cargar from "../../../components/Cargar/Cargar";
-import { AuthContext } from "../../../Context";
-
 import { ReactComponent as PrevIcon } from "../../../assets/svg/iconCarrusel/prev-icon.svg";
 import { ReactComponent as NextIcon } from "../../../assets/svg/iconCarrusel/next-icon.svg";
 import { ReactComponent as Disponible } from "../../../assets/svg/iconos/ok.svg";
 import { ReactComponent as SinStock } from "../../../assets/svg/iconos/notOk.svg";
-
+import { ReactComponent as Edit } from "../../../assets/svg/iconos/editar.svg";
 import Carousel from "react-bootstrap/Carousel";
 import "./VerProducto.scss";
+import Editar from "./Editar/Editar"; // Componente para editar el producto
 
 const VerProducto = ({ apiIp }) => {
-  const userData = useContext(AuthContext); // userData de contexto
+  const userData = useContext(AuthContext);
   const { id } = useParams();
-  const [producto, setProducto] = useState();
-  const [isFavorito, setIsFavorito] = useState(false); // Estado para el checkbox de favorito
+  const [producto, setProducto] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [isFavorito, setIsFavorito] = useState(false);
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex) => {
@@ -37,51 +38,16 @@ const VerProducto = ({ apiIp }) => {
       .catch((error) => console.error("Error al cargar los productos:", error));
   }, [apiIp, id]);
 
-  // Función para verificar si el producto está en favoritos del usuario
-  const verificarFavorito = useCallback(() => {
-    if (!userData || !userData.id) {
-      setIsFavorito(false); // Si no hay usuario autenticado, el producto no puede ser favorito
-      return;
-    }
-
-    fetch(`${apiIp}member/${userData.id}/isFavorito/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setIsFavorito(data); // Establecer el estado del checkbox
-      })
-      .catch((error) =>
-        console.error("Error verificando el producto favorito:", error)
-      );
-  }, [apiIp, id, userData]);
-
   useEffect(() => {
-    if (!userData || !userData.id) {
-      // Si el usuario no está autenticado, evitamos la verificación y seteamos el estado a false
-      setIsFavorito(false);
-      cargarProducto();
-      return;
-    }
     cargarProducto();
-  }, [id, cargarProducto, userData]);
+  }, [id, cargarProducto]);
 
-  useEffect(() => {
-    if (producto) {
-      verificarFavorito(); // Verificar si el producto está en favoritos cuando el producto esté cargado
-    }
-  }, [producto, verificarFavorito]);
-
-  if (!producto) return <Cargar />;
-
-  const { multimedia } = producto;
-
-  // Función para manejar el cambio de estado del checkbox (agregar/eliminar favorito)
   const toggleFavorito = () => {
     if (!userData || !userData.id) {
       console.log("Usuario no autenticado, no se puede modificar el favorito.");
       return;
     }
 
-    // Si el checkbox está marcado, agregamos el producto a favoritos
     if (!isFavorito) {
       fetch(`${apiIp}member/${userData.id}/addFavoritos/${id}`, {
         method: "POST",
@@ -91,45 +57,33 @@ const VerProducto = ({ apiIp }) => {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => {
-          if (response.headers.get("content-type")?.includes("application/json")) {
-            return response.json();
-          }
-          return response.text(); // Para manejar texto plano
+        .then((response) => response.json())
+        .then(() => {
+          setIsFavorito(true);
         })
-        .then((data) => {
-          console.log("Respuesta al agregar a favoritos:", data);
-          setIsFavorito(true); // Actualizamos el estado local
-        })
-        .catch((error) =>
-          console.error("Error al agregar producto a favoritos:", error)
-        );
+        .catch((error) => console.error("Error al agregar a favoritos:", error));
     } else {
-      // Si el checkbox está desmarcado, eliminamos el producto de favoritos
       fetch(`${apiIp}member/${userData.id}/deleteFavoritos/${id}`, {
         method: "DELETE",
         credentials: "include",
       })
-        .then((response) => {
-          if (response.headers.get("content-type")?.includes("application/json")) {
-            return response.json();
-          }
-          return response.text(); // Para manejar texto plano
+        .then(() => {
+          setIsFavorito(false);
         })
-        .then((data) => {
-          console.log("Respuesta al eliminar de favoritos:", data);
-          setIsFavorito(false); // Actualizamos el estado local
-        })
-        .catch((error) =>
-          console.error("Error al eliminar producto de favoritos:", error)
-        );
+        .catch((error) => console.error("Error al eliminar de favoritos:", error));
     }
   };
+
+  if (!producto) return <Cargar />;
+
+  const { multimedia, vendedorId, nombre, precio, stock, vendedorNombre } = producto;
+
+  // Verificar si el usuario es el propietario del producto
+  const isOwner = userData && Number(userData.id) === Number(vendedorId);
 
   return (
     <div className="container tw-mt-6">
       <div className="row verProducto">
-        {/* Columna de imágenes */}
         <div className="col-12 col-md-6 col-lg-4">
           <div className="row">
             {multimedia.length > 1 ? (
@@ -138,7 +92,7 @@ const VerProducto = ({ apiIp }) => {
                 nextIcon={<NextIcon className="carruselIcon" />}
                 activeIndex={index}
                 onSelect={handleSelect}
-                interval={null} // Desactiva el cambio automático
+                interval={null}
               >
                 {multimedia.map((item, idx) => (
                   <Carousel.Item key={idx}>
@@ -156,9 +110,9 @@ const VerProducto = ({ apiIp }) => {
               />
             )}
           </div>
+
           <div className="row botonesCompraFav">
             <div className="col-12">
-              {/* Nuevo diseño de checkbox de like */}
               <div className="con-like">
                 <label className="checkboxLabel">
                   <input
@@ -175,34 +129,55 @@ const VerProducto = ({ apiIp }) => {
             <div className="col-12 col-md-6 d-flex justify-content-center align-items-center">
               <NumericInput stock={producto.stock} />
             </div>
-
             <div className="col-12 col-md-6">
               <Button text="Añadir al carrito" />
             </div>
           </div>
         </div>
 
-        {/* Columna del título y detalles */}
         <div className="col-12 col-md-6 col-lg-8">
-          <h2 className="textoTitulo">{producto.nombre}</h2>
-          <p>
-            Vendido por:
-            <Link to={`/perfil/${producto.vendedorId}`}>
-              {" "}
-              {producto.vendedorNombre}
-            </Link>
-          </p>
-          <p className="precio">{producto.precio}€</p>
-          {producto.stock > 0 ? (
-            <div id="disponible">
-              <Disponible className="iconoDisponibilidad" />
-              <span>Disponible</span>
-            </div>
+          {editMode ? (
+            <Editar producto={producto} setProducto={setProducto} apiIp={apiIp} />
           ) : (
-            <div id="sinStock">
-              <SinStock className="iconoDisponibilidad" />
-              <span>Sin Stock</span>
-            </div>
+            <>
+              <h2 className="textoTitulo">{nombre}</h2>
+              <p>
+                Vendido por:
+                <Link to={`/perfil/${vendedorId}`}>
+                  {" "}
+                  {vendedorNombre}
+                </Link>
+              </p>
+              <p className="precio">{precio}€</p>
+              {stock > 0 ? (
+                <div id="disponible">
+                  <Disponible className="iconoDisponibilidad" />
+                  <span>Disponible</span>
+                </div>
+              ) : (
+                <div id="sinStock">
+                  <SinStock className="iconoDisponibilidad" />
+                  <span>Sin Stock</span>
+                </div>
+              )}
+            </>
+          )}
+
+          {isOwner && !editMode && (
+            <Button
+              onClick={() => setEditMode(!editMode)}
+              className={editMode ? "danger" : ""}
+              text={
+                editMode ? (
+                  "Cancelar"
+                ) : (
+                  <>
+                    <span>Editar</span>
+                    <Edit className="profileIcon" />
+                  </>
+                )
+              }
+            />
           )}
         </div>
       </div>

@@ -25,6 +25,8 @@ body {
   }
 
 .container{
+  min-height: 70vh;
+
   padding-top: 3%;
   padding-bottom: 5%;
 }
@@ -51,6 +53,8 @@ h6 {
 }
 
 .conNavLateral {
+  min-height: 90vh;
+
   margin-left: 225px;
   padding-bottom: 5%;
 
@@ -107,7 +111,7 @@ h6 {
 
 .formulario {
   display: block;
-
+  min-height: 70vh;
   padding: 1.5rem;
   background-color: $fondo;
   border: 1px solid rgba($colorTextoSecundario, 0.4);
