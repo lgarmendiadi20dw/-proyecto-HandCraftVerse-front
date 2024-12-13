@@ -155,7 +155,7 @@ const Navbar = ({ apiIp }) => {
             )}
 
             <div className="custom-navbar-icons">
-                <Corazon className="svg-icon" />
+               <Link to={"/productos/favoritos"}> <Corazon className="svg-icon" /></Link>
                 {isDarkMode ? (
                     <Sol onClick={toggleTheme} className="svg-icon" />
                 ) : (

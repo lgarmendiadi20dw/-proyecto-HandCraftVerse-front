@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Input.scss";
 
-const TextArea = ({ text, name, required  , value}) => {
+const TextArea = ({ text, name, required, value, onChange }) => {
   const [height, setHeight] = useState("45px");
   const textAreaRef = useRef(null);
 
@@ -22,15 +22,16 @@ const TextArea = ({ text, name, required  , value}) => {
         placeholder=""
         name={name}
         id={name}
-        value={value}
+        value={value}   // Valor controlado
         className="input textarea"
         style={{ height }}
         onInput={handleInput}
+        onChange={onChange}  // Manejador de cambios
       />
       <span className="bar" />
       <label htmlFor={name}>
-          {text} {required && <span className="obligatorio">*</span>}
-        </label>
+        {text} {required && <span className="obligatorio">*</span>}
+      </label>
     </div>
   );
 };

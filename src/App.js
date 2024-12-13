@@ -12,6 +12,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import VerProducto from "./Paginas/Productos/verProducto/VerProducto";
 import Footer from "./components/Footer/Footer";
 import Cargar from "./components/Cargar/Cargar";
+import Favoritos from "./Paginas/Productos/Favoritos/Favoritos";
 
 
 import { AuthContext } from "./Context";
@@ -19,9 +20,9 @@ import { AuthContext } from "./Context";
 const Perfil = lazy(() => import("./Paginas/usuario/perfil/Perfil"));
 
 const App = () => {
-  // const apiIp = "https://172.30.100.138:8443/";
+  const apiIp = "https://172.30.100.138:8443/";
   // const apiIp = "https://34.233.251.174:8443/";
-  const apiIp = "https://10.14.0.89:8443/";
+  // const apiIp = "https://10.14.0.89:8443/";
   const [darkMode, setDarkMode] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -57,6 +58,7 @@ const App = () => {
             <Route path="/crear-producto" element={<CrearProducto apiIp={apiIp} />}/>
             <Route path="/categoria/:nombre" element={<VerCategoria apiIp={apiIp} />}/>
             <Route path="/producto/:id" element={<VerProducto apiIp={apiIp} />} />
+            <Route path="/productos/favoritos" element={<Favoritos apiIp={apiIp} />} />
 
             {/* usuarios */}
 

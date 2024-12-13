@@ -29,7 +29,6 @@ const Perfil = ({ apiIp }) => {
     if (userData && Number(userData.id) === Number(id)) {
       setUser(userData);
     } else {
-      console.log("userData =null");
       fetch(`${apiIp}member/${id}`, {
         method: "GET"
       })
@@ -75,7 +74,6 @@ const Perfil = ({ apiIp }) => {
     }
   }, [user, cargarProductos]);
 
-  // console.log("user", user);
   if (!user) {
     return <Cargar/>; // Indicador mientras se carga el perfil
   }

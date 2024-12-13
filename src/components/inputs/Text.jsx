@@ -3,7 +3,7 @@ import { ReactComponent as OjoIcon } from "../../assets/svg/iconos/ojo.svg";
 import { ReactComponent as OjosCruzadosIcon } from "../../assets/svg/iconos/ojos-cruzados.svg";
 import "./Input.scss";
 
-const Text = ({ type, text, name, step, required  , value}) => {
+const Text = ({ type, text, name, step, required, value, onChange }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -12,7 +12,6 @@ const Text = ({ type, text, name, step, required  , value}) => {
 
   return (
     <div className="group">
-      {/* Cambia el tipo de input dinámicamente si es un password */}
       <input
         type={type === "password" && showPassword ? "text" : type}
         name={name}
@@ -21,13 +20,14 @@ const Text = ({ type, text, name, step, required  , value}) => {
         className="input"
         required={required}
         placeholder=""
-        value={value}
-        />
-        <span className="bar" />
-        <label htmlFor={name}>
-          {text} {required && <span className="obligatorio">*</span>}
-        </label>
-      {/* Renderiza el botón solo si el tipo es password */}
+        value={value}   // El valor controlado
+        onChange={onChange}  // Maneja el cambio
+      />
+      <span className="bar" />
+      <label htmlFor={name}>
+        {text} {required && <span className="obligatorio">*</span>}
+      </label>
+
       {type === "password" && (
         <button
           type="button"

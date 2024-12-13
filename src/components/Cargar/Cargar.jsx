@@ -3,19 +3,21 @@ import "./Cargar.scss";
 
 const Cargar = () => {
   return (
-    <div className="lds-spinner">
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
+    <div className="container">
+      <div className="lds-spinner">
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
     </div>
   );
 };
